@@ -1,285 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <base target="_self" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>L4stZ | Tech & Security Specialist</title>
-  <meta name="description" content="Personal portfolio of L4stZ, a tech specialist" />
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- FontAwesome CDN -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-  />
-  
-  <!-- Google Fonts: Inter -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+import React from "react";
+import { GradientText } from "reactbits/text-animations/gradient-text";
+import { TitledCard } from "reactbits/cards/titled-card";
+import { DarkVeilBackground } from "reactbits/backgrounds/dark-veil";
+import { SplitText } from "reactbits/text-animations/split-text";
 
-  <style>
-    /* Custom Tailwind config via script */
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            dark: "#0a0a0a",
-            "neon-blue": "#00f0ff",
-            "neon-green": "#00ff9d",
-            "dark-gray": "#1a1a1a",
-          },
-          fontFamily: {
-            sans: ["Inter", "sans-serif"],
-          },
-          animation: {
-            "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-            "gradient-slide": "gradient-slide 8s ease infinite",
-          },
-          keyframes: {
-            "gradient-slide": {
-              "0%": { "background-position": "0% 50%" },
-              "50%": { "background-position": "100% 50%" },
-              "100%": { "background-position": "0% 50%" },
-            },
-          },
-        },
-      },
-    };
+export default function App() {
+  return (
+    <div style={{ backgroundColor: "#000", minHeight: "100vh" }}>
+      {/* Background */}
+      <DarkVeilBackground style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: -1 }} />
 
-    body {
-      scroll-behavior: smooth;
-      font-family: 'Inter', sans-serif;
-      background: #0a0a0a;
-      color: #cbd5e1; /* Tailwind gray-300 */
-    }
-
-    .neon-text-blue {
-      text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
-    }
-
-    .neon-text-green {
-      text-shadow: 0 0 8px rgba(0, 255, 157, 0.8);
-    }
-
-    .social-link {
-      transition: all 0.3s ease;
-    }
-
-    .social-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 240, 255, 0.4);
-    }
-
-    /* Gradient animated text */
-    .gradient-text {
-      background: linear-gradient(270deg, #00f0ff, #00ff9d, #ff00de, #ff7f00, #00f0ff);
-      background-size: 800% 800%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient-slide 8s ease infinite;
-    }
-
-    /* Tilted Card Styles */
-    .tilted-card {
-      perspective: 1000px;
-      width: 320px;
-      height: 420px;
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 0 20px rgba(0, 255, 157, 0.8);
-      background: linear-gradient(135deg, #005f73, #0a9396, #94d2bd, #0a9396, #005f73);
-      cursor: pointer;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      margin: 0 auto;
-    }
-
-    .tilted-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.9;
-      transition: opacity 0.4s ease;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    .tilted-card:hover {
-      transform: rotate(5deg) scale(1.05);
-      box-shadow: 0 0 40px rgba(0, 255, 157, 1);
-    }
-
-    .tilted-card:hover img {
-      opacity: 1;
-    }
-
-    .tilted-card .title-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 1.5rem;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
-      color: white;
-      font-weight: 900;
-      font-size: 1.8rem;
-      letter-spacing: 0.15em;
-      text-align: center;
-      user-select: none;
-    }
-
-    /* Section container max-width */
-    .container {
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
-</head>
-<body class="flex flex-col min-h-screen">
-
-  <!-- Header -->
-  <header
-    class="sticky top-0 z-50 bg-dark/95 backdrop-blur-sm border-b border-gray-800 py-4"
-  >
-    <div class="container flex justify-between items-center px-6">
-      <a href="#" class="text-4xl font-extrabold gradient-text select-none">L4stZ</a>
-      <nav class="hidden md:flex space-x-8 text-gray-300 font-semibold">
-        <a href="#about" class="hover:text-neon-blue transition-colors">About</a>
-        <a href="#links" class="hover:text-neon-green transition-colors">Links</a>
-      </nav>
-      <button
-        class="md:hidden text-neon-blue text-3xl"
-        aria-label="Toggle menu"
-        id="mobile-menu-btn"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </header>
-
-  <!-- Mobile nav -->
-  <nav
-    id="mobile-menu"
-    class="hidden md:hidden bg-dark/90 backdrop-blur-sm border-b border-gray-800 px-6 py-4"
-  >
-    <div class="flex flex-col space-y-4 font-semibold text-gray-300">
-      <a href="#about" class="hover:text-neon-blue transition-colors">About</a>
-      <a href="#links" class="hover:text-neon-green transition-colors">Links</a>
-    </div>
-  </nav>
-
-  <main class="flex-grow px-6 py-16">
-
-    <!-- Welcome and Subtitle -->
-    <section class="text-center max-w-3xl mx-auto mb-16 select-none">
-      <h2
-        class="text-4xl sm:text-5xl font-extrabold mb-3 gradient-text"
-        style="letter-spacing: 0.15em"
-      >
-        Welcome to my world
-      </h2>
-      <p class="text-xl text-neon-green font-semibold tracking-wide">
-        A tech genius who will be remembered by the whole god damn world 📍
-      </p>
-    </section>
-
-    <!-- Tilted Card -->
-    <section class="mb-20">
-      <div class="tilted-card relative mx-auto">
-        <img
-          src="https://i.pinimg.com/736x/ac/3f/79/ac3f792bdaf4274d1f07f6f91fc7552a.jpg"
-          alt="L4stZ-R2S"
-          draggable="false"
+      {/* Welcome text */}
+      <div style={{ textAlign: "center", paddingTop: "40px" }}>
+        <SplitText
+          text="Welcome to my world"
+          delay={100}
+          style={{
+            fontSize: "3rem",
+            fontWeight: "bold",
+            color: "white",
+          }}
         />
-        <div class="title-overlay">L4stZ-R2S</div>
       </div>
-    </section>
 
-    <!-- About Section -->
-    <section
-      id="about"
-      class="bg-dark-gray rounded-xl p-8 max-w-3xl mx-auto text-gray-300 shadow-lg shadow-neon-green/50"
-    >
-      <h2 class="text-3xl font-bold mb-6 neon-text-blue select-text">About Me</h2>
-      <p class="text-lg leading-relaxed">
-        I am a passionate technology and security specialist with extensive
-        experience in system architecture, penetration testing, and software
-        engineering. I excel in bridging the gap between innovative tech
-        solutions and practical application, focusing on creating secure,
-        scalable, and efficient systems. Continuous learning and adaptability
-        keep me ahead of evolving industry trends. Whether leading projects or
-        deep-diving into research, I thrive in environments that challenge my
-        skills and push boundaries.
-      </p>
-    </section>
-
-    <!-- Links Section -->
-    <section
-      id="links"
-      class="py-16 max-w-3xl mx-auto"
-    >
-      <h2 class="text-3xl font-bold mb-12 neon-text-green text-center select-text">
-        Connect With Me
-      </h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <a
-          href="https://discord.com/users/1289186305028259922"
-          target="_blank"
-          class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-blue hover:text-neon-blue border border-gray-800"
-          rel="noopener noreferrer"
-        >
-          <i class="fab fa-discord text-4xl mb-3"></i>
-          <span class="font-medium">Discord</span>
-        </a>
-        <a
-          href="https://www.linkedin.com/in/adem-alioua-5864ab370/"
-          target="_blank"
-          class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-blue hover:text-neon-blue border border-gray-800"
-          rel="noopener noreferrer"
-        >
-          <i class="fab fa-linkedin-in text-4xl mb-3"></i>
-          <span class="font-medium">LinkedIn</span>
-        </a>
-        <a
-          href="https://fr.fiverr.com/ademalioua"
-          target="_blank"
-          class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-green hover:text-neon-green border border-gray-800"
-          rel="noopener noreferrer"
-        >
-          <i class="fab fa-fonticons-fi text-4xl mb-3"></i>
-          <span class="font-medium">Fiverr</span>
-        </a>
-        <a
-          href="https://open.spotify.com/track/7JQ9ELsV3FucPDWl0qjihX"
-          target="_blank"
-          class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-green hover:text-neon-green border border-gray-800"
-          rel="noopener noreferrer"
-        >
-          <i class="fab fa-spotify text-4xl mb-3"></i>
-          <span class="font-medium">Spotify</span>
-        </a>
+      {/* Main Title */}
+      <div style={{ textAlign: "center", marginTop: "10px" }}>
+        <GradientText
+          text="L4stZ"
+          colors={["#ff00cc", "#3333ff", "#00ffcc"]}
+          style={{ fontSize: "4rem", fontWeight: "bold" }}
+        />
+        <GradientText
+          text="A Tech Genius, Creator & Visionary"
+          colors={["#ff00cc", "#ffcc00", "#00ff99"]}
+          style={{ fontSize: "1.5rem" }}
+        />
       </div>
-    </section>
-  </main>
 
-  <!-- Footer -->
-  <footer
-    class="bg-dark-gray py-8 px-6 border-t border-gray-800 text-center text-gray-400 select-none"
-  >
-    &copy; 2025 L4stZ. All rights reserved.
-  </footer>
+      {/* Titled Card */}
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "40px" }}>
+        <TitledCard
+          image="https://i.pinimg.com/736x/ac/3f/79/ac3f792bdaf4274d1f07f6f91fc7552a.jpg"
+          title={<GradientText text="About Me" colors={["#ff00cc", "#ffcc00", "#00ff99"]} />}
+          description={
+            <GradientText
+              text="I’m L4stZ — a tech nerd passionate about creating stunning, functional web experiences with cutting-edge technologies. With a knack for blending style and performance, I turn ideas into interactive realities."
+              colors={["#00ffcc", "#ffcc00", "#ff00cc"]}
+            />
+          }
+        />
+      </div>
 
-  <script>
-    // Mobile menu toggle
-    document.getElementById("mobile-menu-btn").addEventListener("click", () => {
-      const menu = document.getElementById("mobile-menu");
-      menu.classList.toggle("hidden");
-    });
-  </script>
-</body>
-</html>
+      {/* Links Section */}
+      <div style={{ textAlign: "center", marginTop: "50px" }}>
+        <GradientText
+          text="Connect with me:"
+          colors={["#ff00cc", "#3333ff", "#00ffcc"]}
+          style={{ fontSize: "1.8rem", marginBottom: "20px" }}
+        />
+        <div style={{ display: "flex", justifyContent: "center", gap: "20px", flexWrap: "wrap" }}>
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+            <GradientText text="GitHub" colors={["#ff00cc", "#ffcc00", "#00ffcc"]} />
+          </a>
+          <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">
+            <GradientText text="LinkedIn" colors={["#ff00cc", "#ffcc00", "#00ffcc"]} />
+          </a>
+          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+            <GradientText text="Twitter" colors={["#ff00cc", "#ffcc00", "#00ffcc"]} />
+          </a>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div style={{ textAlign: "center", marginTop: "60px", paddingBottom: "30px" }}>
+        <GradientText
+          text="© 2025 L4stZ. All rights reserved."
+          colors={["#00ffcc", "#ffcc00", "#ff00cc"]}
+          style={{ fontSize: "0.9rem" }}
+        />
+      </div>
+    </div>
+  );
+}
