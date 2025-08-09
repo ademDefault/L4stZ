@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>L4stZ | Tech & Security Specialist</title>
   <meta name="description" content="Personal portfolio of L4stZ, a tech specialist" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -32,90 +32,80 @@
   </script>
 
   <style>
-    /* Beams Background */
-    .beams-background {
-      position: absolute;
+    /* Dark Veil Background Styling */
+    .dark-veil-background {
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, rgba(0, 255, 255, 0.1) 25%, transparent 25%) -50px 0,
-                  linear-gradient(-45deg, rgba(0, 255, 255, 0.1) 25%, transparent 25%) -50px 0,
-                  linear-gradient(45deg, rgba(0, 255, 255, 0.1) 25%, transparent 25%) 0px 0,
-                  linear-gradient(-45deg, rgba(0, 255, 255, 0.1) 25%, transparent 25%) 0px 0;
-      background-size: 100px 100px;
-      pointer-events: none;
-      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+      background: url('https://reactbits.dev/backgrounds/dark-veil') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -1; /* Behind everything */
+      pointer-events: none; /* Let clicks pass through */
     }
 
-    /* Split text animation styles with bigger font */
+    /* Gradient text animation */
+    .gradient-text {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: linear-gradient(
+        90deg,
+        #00f0ff,
+        #00ff9d,
+        #ff00de,
+        #ff7f00,
+        #00f0ff
+      );
+      background-size: 400% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradient-animation 6s ease infinite;
+    }
+    @keyframes gradient-animation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Split text animation with bigger font */
     .split-text {
       display: inline-block;
       overflow: hidden;
       white-space: nowrap;
-      font-size: 3.5rem; /* BIGGER font size */
+      font-size: 3.5rem;
       font-weight: 600;
     }
-
     .split-text span {
       display: inline-block;
       opacity: 0;
       transform: translateY(100%);
       animation: slide-up 0.5s forwards;
     }
-
-    /* Delay each letter's animation */
-    .split-text span:nth-child(1) {
-      animation-delay: 0s;
-    }
-    .split-text span:nth-child(2) {
-      animation-delay: 0.05s;
-    }
-    .split-text span:nth-child(3) {
-      animation-delay: 0.1s;
-    }
-    .split-text span:nth-child(4) {
-      animation-delay: 0.15s;
-    }
-    .split-text span:nth-child(5) {
-      animation-delay: 0.2s;
-    }
-    .split-text span:nth-child(6) {
-      animation-delay: 0.25s;
-    }
-    .split-text span:nth-child(7) {
-      animation-delay: 0.3s;
-    }
-    .split-text span:nth-child(8) {
-      animation-delay: 0.35s;
-    }
-    .split-text span:nth-child(9) {
-      animation-delay: 0.4s;
-    }
-    .split-text span:nth-child(10) {
-      animation-delay: 0.45s;
-    }
-    .split-text span:nth-child(11) {
-      animation-delay: 0.5s;
-    }
-    .split-text span:nth-child(12) {
-      animation-delay: 0.55s;
-    }
-    .split-text span:nth-child(13) {
-      animation-delay: 0.6s;
-    }
-    .split-text span:nth-child(14) {
-      animation-delay: 0.65s;
-    }
-    .split-text span:nth-child(15) {
-      animation-delay: 0.7s;
-    }
-    .split-text span:nth-child(16) {
-      animation-delay: 0.75s;
-    }
-    .split-text span:nth-child(17) {
-      animation-delay: 0.8s;
-    }
+    .split-text span:nth-child(1) { animation-delay: 0s; }
+    .split-text span:nth-child(2) { animation-delay: 0.05s; }
+    .split-text span:nth-child(3) { animation-delay: 0.1s; }
+    .split-text span:nth-child(4) { animation-delay: 0.15s; }
+    .split-text span:nth-child(5) { animation-delay: 0.2s; }
+    .split-text span:nth-child(6) { animation-delay: 0.25s; }
+    .split-text span:nth-child(7) { animation-delay: 0.3s; }
+    .split-text span:nth-child(8) { animation-delay: 0.35s; }
+    .split-text span:nth-child(9) { animation-delay: 0.4s; }
+    .split-text span:nth-child(10) { animation-delay: 0.45s; }
+    .split-text span:nth-child(11) { animation-delay: 0.5s; }
+    .split-text span:nth-child(12) { animation-delay: 0.55s; }
+    .split-text span:nth-child(13) { animation-delay: 0.6s; }
+    .split-text span:nth-child(14) { animation-delay: 0.65s; }
+    .split-text span:nth-child(15) { animation-delay: 0.7s; }
+    .split-text span:nth-child(16) { animation-delay: 0.75s; }
+    .split-text span:nth-child(17) { animation-delay: 0.8s; }
 
     @keyframes slide-up {
       to {
@@ -137,7 +127,6 @@
       box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
     }
 
-    /* Tilted Card Styles */
     .tilted-card {
       perspective: 1000px;
     }
@@ -146,16 +135,15 @@
     }
   </style>
 </head>
-<body class="bg-dark text-gray-200 font-sans min-h-screen flex flex-col">
-  <!-- Beams Background -->
-  <div class="beams-background"></div>
+<body class="bg-dark text-gray-200 font-sans min-h-screen flex flex-col relative overflow-x-hidden">
+  <!-- Dark Veil Background -->
+  <div class="dark-veil-background"></div>
 
   <header
     class="sticky top-0 z-50 bg-dark/90 backdrop-blur-sm border-b border-gray-800"
   >
     <div class="container mx-auto px-6 py-4">
       <nav class="flex justify-between items-center">
-        <!-- Animated gradient text title -->
         <a href="#" class="gradient-text">L4stZ</a>
         <div class="hidden md:flex space-x-8">
           <a href="#about" class="hover:text-neon-blue transition-colors">About</a>
@@ -168,11 +156,10 @@
     </div>
   </header>
 
-  <main class="flex-grow">
+  <main class="flex-grow relative z-10">
     <!-- Hero Section -->
     <section class="py-20 md:py-32 px-6">
       <div class="container mx-auto text-center">
-        <!-- BIGGER split text animation above hero title -->
         <h2 class="split-text text-neon-green mb-6 font-semibold">
           <span>W</span><span>e</span><span>l</span><span>c</span><span>o</span><span>m</span><span>e</span>
           <span> </span>
@@ -183,7 +170,6 @@
           <span>w</span><span>o</span><span>r</span><span>l</span><span>d</span>
         </h2>
 
-        <!-- Animated gradient text for hero title -->
         <h1 class="gradient-text mb-4">L4stZ</h1>
 
         <p class="text-xl md:text-2xl text-neon-green mb-2">
@@ -239,6 +225,95 @@
         <div class="mt-12">
           <h3 class="text-xl font-semibold mb-4 neon-text-green">Currently Playing</h3>
           <iframe
-            src="https://open.spotify.com/embed/track/7JQ9
-::contentReference[oaicite:4]{index=4}
- 
+            src="https://open.spotify.com/embed/track/7JQ9ELsV3FucPDWl0qjihX"
+            width="100%"
+            height="80"
+            frameborder="0"
+            allowtransparency="true"
+            allow="encrypted-media"
+            class="rounded-lg"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Links Section -->
+    <section id="links" class="py-16 px-6">
+      <div class="container mx-auto max-w-3xl">
+        <h2 class="text-3xl font-bold mb-12 neon-text-green text-center">
+          Connect With Me
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <a
+            href="https://discord.com/users/1289186305028259922"
+            target="_blank"
+            class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-blue hover:text-neon-blue border border-gray-800"
+          >
+            <i class="fab fa-discord text-4xl mb-3"></i>
+            <span class="font-medium">Discord</span>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/adem-alioua-5864ab370/"
+            target="_blank"
+            class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-blue hover:text-neon-blue border border-gray-800"
+          >
+            <i class="fab fa-linkedin-in text-4xl mb-3"></i>
+            <span class="font-medium">LinkedIn</span>
+          </a>
+          <a
+            href="https://fr.fiverr.com/ademalioua"
+            target="_blank"
+            class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-green hover:text-neon-green border border-gray-800"
+          >
+            <i class="fab fa-fonticons-fi text-4xl mb-3"></i>
+            <span class="font-medium">Fiverr</span>
+          </a>
+          <a
+            href="https://open.spotify.com/track/7JQ9ELsV3FucPDWl0qjihX"
+            target="_blank"
+            class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-green hover:text-neon-green border border-gray-800"
+          >
+            <i class="fab fa-spotify text-4xl mb-3"></i>
+            <span class="font-medium">Spotify</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark-gray py-8 px-6 border-t border-gray-800">
+    <div class="container mx-auto text-center">
+      <p class="text-gray-400">&copy; 2025 L4stZ. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle functionality
+    document.querySelector("button").addEventListener("click", function () {
+      const nav = document.querySelector(".hidden.md\\:flex");
+      nav.classList.toggle("hidden");
+      nav.classList.toggle("flex");
+      nav.classList.toggle("flex-col");
+      nav.classList.toggle("absolute");
+      nav.classList.toggle("top-16");
+      nav.classList.toggle("right-6");
+      nav.classList.toggle("bg-dark");
+      nav.classList.toggle("p-4");
+      nav.classList.toggle("rounded-lg");
+      nav.classList.toggle("border");
+      nav.classList.toggle("border-gray-800");
+      nav.classList.toggle("space-y-4");
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href")).scrollIntoView({
+          behavior: "smooth",
+        });
+      });
+    });
+  </script>
+</body>
+</html>
