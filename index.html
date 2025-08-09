@@ -1,84 +1,279 @@
-import React from "react";
-import { GradientText } from "reactbits/text-animations/gradient-text";
-import { TitledCard } from "reactbits/cards/titled-card";
-import { DarkVeilBackground } from "reactbits/backgrounds/dark-veil";
-import { SplitText } from "reactbits/text-animations/split-text";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base target="_self" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>L4stZ | Tech & Security Specialist</title>
+  <meta name="description" content="Personal portfolio of L4stZ, a tech specialist" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: "#0a0a0a",
+            "neon-blue": "#00f0ff",
+            "neon-green": "#00ff9d",
+            "dark-gray": "rgba(0,0,0,0.6)",
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+          },
+          animation: {
+            "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
-export default function App() {
-  return (
-    <div style={{ backgroundColor: "#000", minHeight: "100vh" }}>
-      {/* Background */}
-      <DarkVeilBackground style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: -1 }} />
+    body {
+      margin: 0;
+      scroll-behavior: smooth;
+      font-family: "Inter", sans-serif;
+      color: white;
+      position: relative;
+      min-height: 100vh;
+      background: black;
+      overflow-x: hidden;
+    }
 
-      {/* Welcome text */}
-      <div style={{ textAlign: "center", paddingTop: "40px" }}>
-        <SplitText
-          text="Welcome to my world"
-          delay={100}
-          style={{
-            fontSize: "3rem",
-            fontWeight: "bold",
-            color: "white",
-          }}
-        />
+    /* Video Background */
+    #bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      object-fit: cover;
+      filter: brightness(0.5) saturate(1.2);
+    }
+
+    /* Adjust colors and shadows for neon text on video */
+    .neon-text-blue {
+      color: #00f0ff;
+      text-shadow:
+        0 0 5px #00f0ff,
+        0 0 10px #00f0ff,
+        0 0 20px #00f0ff;
+    }
+
+    .neon-text-green {
+      color: #00ff9d;
+      text-shadow:
+        0 0 5px #00ff9d,
+        0 0 10px #00ff9d,
+        0 0 20px #00ff9d;
+    }
+
+    /* Container backgrounds made transparent or semi-transparent */
+    header,
+    main,
+    footer {
+      background: transparent !important;
+    }
+
+    header nav a:hover {
+      color: #00f0ff !important;
+    }
+
+    .social-link {
+      transition: all 0.3s ease;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      text-shadow: 0 0 5px black;
+    }
+
+    .social-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 240, 255, 0.6);
+      color: #00f0ff !important;
+      border-color: #00f0ff !important;
+      background-color: rgba(0, 240, 255, 0.1);
+    }
+
+    /* Buttons */
+    a.px-6.py-3.bg-neon-blue {
+      background-color: #00f0ff;
+      color: #000;
+      box-shadow:
+        0 0 10px #00f0ff,
+        0 0 20px #00f0ff;
+    }
+    a.px-6.py-3.bg-neon-blue:hover {
+      background-color: #00c0d0;
+    }
+
+    a.px-6.py-3.border-neon-green {
+      border-color: #00ff9d;
+      color: #00ff9d;
+      text-shadow:
+        0 0 5px #00ff9d;
+    }
+    a.px-6.py-3.border-neon-green:hover {
+      background-color: rgba(0, 255, 157, 0.1);
+    }
+  </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col">
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline id="bg-video" preload="auto" poster="https://guns.lol/assets/img/deprived0-poster.webp">
+    <source src="https://guns.lol/assets/video/deprived0.webm" type="video/webm" />
+    <source src="https://guns.lol/assets/video/deprived0.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <header class="sticky top-0 z-50 bg-transparent backdrop-blur-sm border-b border-white/20">
+    <div class="container mx-auto px-6 py-4">
+      <nav class="flex justify-between items-center">
+        <a href="#" class="text-xl font-bold neon-text-blue">L4stZ</a>
+        <div class="hidden md:flex space-x-8">
+          <a href="#about" class="hover:text-neon-blue transition-colors">About</a>
+          <a href="#links" class="hover:text-neon-green transition-colors">Links</a>
+        </div>
+        <button class="md:hidden text-neon-blue">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- Hero Section -->
+    <section class="py-20 md:py-32 px-6">
+      <div class="container mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 neon-text-blue">L4stZ</h1>
+        <p class="text-xl md:text-2xl neon-text-green mb-2">
+          A tech genius who will be remembered by the whole god damn world📍
+        </p>
+        <p class="text-lg text-white/80 mb-8">Tech Specialist | Security Researcher</p>
+        <p class="text-lg text-white/80 mb-8">L4stZ never dies | I mogg you</p>
+        <div class="flex justify-center space-x-4">
+          <a
+            href="#about"
+            class="px-6 py-3 bg-neon-blue text-dark font-medium rounded-full hover:bg-opacity-90 transition-all"
+            >Learn More</a
+          >
+          <a
+            href="#links"
+            class="px-6 py-3 border border-neon-green text-neon-green font-medium rounded-full hover:bg-neon-green hover:bg-opacity-10 transition-all"
+            >Connect</a
+          >
+        </div>
       </div>
+    </section>
 
-      {/* Main Title */}
-      <div style={{ textAlign: "center", marginTop: "10px" }}>
-        <GradientText
-          text="L4stZ"
-          colors={["#ff00cc", "#3333ff", "#00ffcc"]}
-          style={{ fontSize: "4rem", fontWeight: "bold" }}
-        />
-        <GradientText
-          text="A Tech Genius, Creator & Visionary"
-          colors={["#ff00cc", "#ffcc00", "#00ff99"]}
-          style={{ fontSize: "1.5rem" }}
-        />
+    <!-- About Section -->
+    <section id="about" class="py-16 px-6 bg-transparent">
+      <div class="container mx-auto max-w-3xl">
+        <h2 class="text-3xl font-bold mb-8 neon-text-blue">About Me</h2>
+        <p class="text-lg mb-8 leading-relaxed text-white/90">
+          I'm L4stZ, a specialist in technology and security research with deep expertise in system
+          analysis.
+        </p>
+
+        <!-- Spotify Player -->
+        <div class="mt-12">
+          <h3 class="text-xl font-semibold mb-4 neon-text-green">Currently Playing</h3>
+          <iframe
+            src="https://open.spotify.com/embed/track/7JQ9ELsV3FucPDWl0qjihX"
+            width="100%"
+            height="80"
+            frameborder="0"
+            allowtransparency="true"
+            allow="encrypted-media"
+            class="rounded-lg"
+          ></iframe>
+        </div>
       </div>
+    </section>
 
-      {/* Titled Card */}
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "40px" }}>
-        <TitledCard
-          image="https://i.pinimg.com/736x/ac/3f/79/ac3f792bdaf4274d1f07f6f91fc7552a.jpg"
-          title={<GradientText text="About Me" colors={["#ff00cc", "#ffcc00", "#00ff99"]} />}
-          description={
-            <GradientText
-              text="I’m L4stZ — a tech nerd passionate about creating stunning, functional web experiences with cutting-edge technologies. With a knack for blending style and performance, I turn ideas into interactive realities."
-              colors={["#00ffcc", "#ffcc00", "#ff00cc"]}
-            />
-          }
-        />
-      </div>
-
-      {/* Links Section */}
-      <div style={{ textAlign: "center", marginTop: "50px" }}>
-        <GradientText
-          text="Connect with me:"
-          colors={["#ff00cc", "#3333ff", "#00ffcc"]}
-          style={{ fontSize: "1.8rem", marginBottom: "20px" }}
-        />
-        <div style={{ display: "flex", justifyContent: "center", gap: "20px", flexWrap: "wrap" }}>
-          <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
-            <GradientText text="GitHub" colors={["#ff00cc", "#ffcc00", "#00ffcc"]} />
+    <!-- Links Section -->
+    <section id="links" class="py-16 px-6 bg-transparent">
+      <div class="container mx-auto max-w-3xl">
+        <h2 class="text-3xl font-bold mb-12 neon-text-green text-center">Connect With Me</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <a
+            href="https://discord.com/users/1289186305028259922"
+            target="_blank"
+            class="social-link p-6 rounded-lg flex flex-col items-center justify-center hover:text-neon-blue border border-white/20"
+          >
+            <i class="fab fa-discord text-4xl mb-3"></i>
+            <span class="font-medium">Discord</span>
           </a>
-          <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">
-            <GradientText text="LinkedIn" colors={["#ff00cc", "#ffcc00", "#00ffcc"]} />
+          <a
+            href="https://www.linkedin.com/in/adem-alioua-5864ab370/"
+            target="_blank"
+            class="social-link p-6 rounded-lg flex flex-col items-center justify-center hover:text-neon-blue border border-white/20"
+          >
+            <i class="fab fa-linkedin-in text-4xl mb-3"></i>
+            <span class="font-medium">LinkedIn</span>
           </a>
-          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
-            <GradientText text="Twitter" colors={["#ff00cc", "#ffcc00", "#00ffcc"]} />
+          <a
+            href="https://fr.fiverr.com/ademalioua"
+            target="_blank"
+            class="social-link p-6 rounded-lg flex flex-col items-center justify-center hover:text-neon-green border border-white/20"
+          >
+            <i class="fab fa-fonticons-fi text-4xl mb-3"></i>
+            <span class="font-medium">Fiverr</span>
+          </a>
+          <a
+            href="https://open.spotify.com/track/7JQ9ELsV3FucPDWl0qjihX"
+            target="_blank"
+            class="social-link p-6 rounded-lg flex flex-col items-center justify-center hover:text-neon-green border border-white/20"
+          >
+            <i class="fab fa-spotify text-4xl mb-3"></i>
+            <span class="font-medium">Spotify</span>
           </a>
         </div>
       </div>
+    </section>
+  </main>
 
-      {/* Footer */}
-      <div style={{ textAlign: "center", marginTop: "60px", paddingBottom: "30px" }}>
-        <GradientText
-          text="© 2025 L4stZ. All rights reserved."
-          colors={["#00ffcc", "#ffcc00", "#ff00cc"]}
-          style={{ fontSize: "0.9rem" }}
-        />
-      </div>
+  <footer class="py-8 px-6 border-t border-white/20 bg-transparent">
+    <div class="container mx-auto text-center text-white/60">
+      &copy; 2025 L4stZ. All rights reserved.
     </div>
-  );
-}
+  </footer>
+
+  <script>
+    // Mobile menu toggle functionality
+    document.querySelector("button").addEventListener("click", function () {
+      const nav = document.querySelector(".hidden.md\\:flex");
+      nav.classList.toggle("hidden");
+      nav.classList.toggle("flex");
+      nav.classList.toggle("flex-col");
+      nav.classList.toggle("absolute");
+      nav.classList.toggle("top-16");
+      nav.classList.toggle("right-6");
+      nav.classList.toggle("bg-dark");
+      nav.classList.toggle("p-4");
+      nav.classList.toggle("rounded-lg");
+      nav.classList.toggle("border");
+      nav.classList.toggle("border-gray-800");
+      nav.classList.toggle("space-y-4");
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href")).scrollIntoView({
+          behavior: "smooth",
+        });
+      });
+    });
+  </script>
+</body>
+</html>
