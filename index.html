@@ -1,448 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <base target="_self" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>L4stZ | Tech & Security Specialist</title>
-  <meta name="description" content="Personal portfolio of L4stZ, a tech specialist" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-  />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            dark: "#0a0a0a",
-            "neon-purple": "#9333ea",
-            "neon-pink": "#ec4899",
-            "neon-cyan": "#06b6d4",
-            "neon-orange": "#f97316",
-            "dark-gray": "rgba(0,0,0,0.6)",
-          },
-          fontFamily: {
-            sans: ["Inter", "sans-serif"],
-          },
-          animation: {
-            "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-          },
-        },
-      },
-    };
-  </script>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
-
-    body {
-      margin: 0;
-      scroll-behavior: smooth;
-      font-family: "Inter", sans-serif;
-      color: white;
-      position: relative;
-      min-height: 100vh;
-      background: black;
-      overflow-x: hidden;
-    }
-
-    /* Video Background with smooth transitions */
-    #bg-video {
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      min-width: 100vw;
-      min-height: 100vh;
-      width: auto;
-      height: auto;
-      z-index: -1;
-      object-fit: cover;
-      filter: brightness(0.4) saturate(1.3) contrast(1.1);
-      opacity: 0;
-      transition: opacity 2s ease-in-out;
-    }
-
-    #bg-video.loaded {
-      opacity: 1;
-    }
-
-    /* Smooth loading animation */
-    .loading-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 50%, #1a1a1a 100%);
-      z-index: -2;
-      opacity: 1;
-      transition: opacity 2s ease-in-out;
-    }
-
-    .loading-overlay.hidden {
-      opacity: 0;
-    }
-
-    /* Enhanced neon text effects with new colors */
-    .neon-text-purple {
-      color: #a855f7;
-      text-shadow:
-        0 0 5px #a855f7,
-        0 0 10px #a855f7,
-        0 0 20px #a855f7,
-        0 0 30px #a855f7;
-    }
-
-    .neon-text-pink {
-      color: #ec4899;
-      text-shadow:
-        0 0 5px #ec4899,
-        0 0 10px #ec4899,
-        0 0 20px #ec4899,
-        0 0 30px #ec4899;
-    }
-
-    .neon-text-cyan {
-      color: #06b6d4;
-      text-shadow:
-        0 0 5px #06b6d4,
-        0 0 10px #06b6d4,
-        0 0 20px #06b6d4,
-        0 0 30px #06b6d4;
-    }
-
-    .neon-text-orange {
-      color: #f97316;
-      text-shadow:
-        0 0 5px #f97316,
-        0 0 10px #f97316,
-        0 0 20px #f97316,
-        0 0 30px #f97316;
-    }
-
-    .neon-text-white {
-      color: #ffffff;
-      text-shadow:
-        0 0 5px rgba(255, 255, 255, 0.8),
-        0 0 10px rgba(255, 255, 255, 0.6),
-        0 0 20px rgba(255, 255, 255, 0.4);
-    }
-
-    /* Container backgrounds made transparent or semi-transparent */
-    header,
-    main,
-    footer {
-      background: transparent !important;
-    }
-
-    header nav a:hover {
-      color: #a855f7 !important;
-    }
-
-    .social-link {
-      transition: all 0.3s ease;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      text-shadow: 0 0 5px black;
-      backdrop-filter: blur(10px);
-    }
-
-    .social-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(168, 85, 247, 0.6);
-      color: #a855f7 !important;
-      border-color: #a855f7 !important;
-      background-color: rgba(168, 85, 247, 0.1);
-    }
-
-    .social-link:nth-child(2):hover {
-      box-shadow: 0 5px 15px rgba(236, 72, 153, 0.6);
-      color: #ec4899 !important;
-      border-color: #ec4899 !important;
-      background-color: rgba(236, 72, 153, 0.1);
-    }
-
-    .social-link:nth-child(3):hover {
-      box-shadow: 0 5px 15px rgba(6, 182, 212, 0.6);
-      color: #06b6d4 !important;
-      border-color: #06b6d4 !important;
-      background-color: rgba(6, 182, 212, 0.1);
-    }
-
-    .social-link:nth-child(4):hover {
-      box-shadow: 0 5px 15px rgba(249, 115, 22, 0.6);
-      color: #f97316 !important;
-      border-color: #f97316 !important;
-      background-color: rgba(249, 115, 22, 0.1);
-    }
-
-    /* Enhanced buttons with gradient effects */
-    .btn-primary {
-      background: linear-gradient(135deg, #a855f7, #ec4899);
-      color: #000;
-      box-shadow:
-        0 0 15px rgba(168, 85, 247, 0.5),
-        0 0 25px rgba(236, 72, 153, 0.3);
-      border: none;
-      font-weight: 600;
-    }
-    
-    .btn-primary:hover {
-      background: linear-gradient(135deg, #9333ea, #db2777);
-      transform: translateY(-2px);
-      box-shadow:
-        0 5px 20px rgba(168, 85, 247, 0.7),
-        0 5px 30px rgba(236, 72, 153, 0.5);
-    }
-
-    .btn-secondary {
-      border: 2px solid #06b6d4;
-      color: #06b6d4;
-      background: rgba(6, 182, 212, 0.1);
-      backdrop-filter: blur(10px);
-      text-shadow: 0 0 5px #06b6d4;
-      font-weight: 600;
-    }
-    
-    .btn-secondary:hover {
-      background: rgba(6, 182, 212, 0.2);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(6, 182, 212, 0.4);
-    }
-
-    /* Enhanced section backgrounds */
-    .section-overlay {
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(5px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    /* Glowing effect for main title */
-    .hero-title {
-      background: linear-gradient(135deg, #a855f7, #ec4899, #06b6d4);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: glow 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from {
-        filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
-      }
-      to {
-        filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.7));
-      }
-    }
-  </style>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L4stZ | Tech & Security Specialist</title>
+    <meta name="description" content="Personal portfolio of L4stZ, a tech specialist">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: "#0a0a0a",
+                        "neon-blue": "#00f0ff",
+                        "neon-green": "#00ff9d",
+                        "dark-gray": "#1a1a1a"
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            scroll-behavior: smooth;
+        }
+        
+        .neon-text-blue {
+            text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+        }
+        
+        .neon-text-green {
+            text-shadow: 0 0 5px rgba(0, 255, 157, 0.5);
+        }
+        
+        .social-link {
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+        }
+    </style>
 </head>
-<body class="font-sans min-h-screen flex flex-col">
-  <!-- Loading overlay background -->
-  <div class="loading-overlay" id="loadingOverlay"></div>
-  
-  <!-- Background Video -->
-  <video autoplay muted loop playsinline id="bg-video" preload="auto">
-    <!-- Lien Google Drive converti en lien direct -->
-    <source src="https://drive.google.com/uc?export=download&id=1jRiFO4fItHOL0mMG8D75x-cMJknwshB2" type="video/mp4" />
-    <!-- Fallback si le lien Google Drive ne fonctionne pas -->
-    <source src="https://guns.lol/assets/video/deprived0.mp4" type="video/mp4" />
-    <source src="https://guns.lol/assets/video/deprived0.webm" type="video/webm" />
-    Your browser does not support the video tag.
-  </video>
-
-  <header class="sticky top-0 z-50 bg-transparent backdrop-blur-sm border-b border-white/20">
-    <div class="container mx-auto px-6 py-4">
-      <nav class="flex justify-between items-center">
-        <a href="#" class="text-xl font-bold neon-text-purple">L4stZ</a>
-        <div class="hidden md:flex space-x-8">
-          <a href="#about" class="hover:text-neon-purple transition-colors font-medium">About</a>
-          <a href="#links" class="hover:text-neon-pink transition-colors font-medium">Links</a>
+<body class="bg-dark text-gray-200 font-sans min-h-screen flex flex-col">
+    <header class="sticky top-0 z-50 bg-dark/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <a href="#" class="text-xl font-bold neon-text-blue">L4stZ</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="hover:text-neon-blue transition-colors">About</a>
+                    <a href="#links" class="hover:text-neon-green transition-colors">Links</a>
+                </div>
+                <button class="md:hidden text-neon-blue">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </nav>
         </div>
-        <button class="md:hidden text-neon-purple">
-          <i class="fas fa-bars text-2xl"></i>
-        </button>
-      </nav>
-    </div>
-  </header>
+    </header>
 
-  <main class="flex-grow">
-    <!-- Hero Section -->
-    <section class="py-20 md:py-32 px-6">
-      <div class="container mx-auto text-center">
-        <h1 class="text-4xl md:text-6xl font-bold mb-4 hero-title">L4stZ</h1>
-        <p class="text-xl md:text-2xl neon-text-cyan mb-2">
-          A tech genius who will be remembered by the whole god damn world📍
-        </p>
-        <p class="text-lg neon-text-white mb-4">Tech Specialist | Security Researcher</p>
-        <p class="text-lg neon-text-orange mb-8">L4stZ never dies | I mogg you</p>
-        <div class="flex justify-center space-x-4">
-          <a
-            href="#about"
-            class="px-6 py-3 btn-primary rounded-full transition-all"
-            >Learn More</a
-          >
-          <a
-            href="#links"
-            class="px-6 py-3 btn-secondary rounded-full transition-all"
-            >Connect</a
-          >
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="py-20 md:py-32 px-6">
+            <div class="container mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 neon-text-blue">L4stZ</h1>
+                <p class="text-xl md:text-2xl text-neon-green mb-2">A tech genius who will be remembered by the whole god damn world📍</p>
+                <p class="text-lg text-gray-400 mb-8">Tech Specialist | Security Researcher</p>
+                <p class="text-lg text-gray-400 mb-8">L4stZ never dies | I mogg you</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#about" class="px-6 py-3 bg-neon-blue text-dark font-medium rounded-full hover:bg-opacity-90 transition-all">Learn More</a>
+                    <a href="#links" class="px-6 py-3 border border-neon-green text-neon-green font-medium rounded-full hover:bg-neon-green hover:bg-opacity-10 transition-all">Connect</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 px-6 bg-dark-gray">
+            <div class="container mx-auto max-w-3xl">
+                <h2 class="text-3xl font-bold mb-8 neon-text-blue">About Me</h2>
+                <p class="text-lg mb-8 leading-relaxed">I'm L4stZ, a specialist in technology and security research with deep expertise in system analysis.</p>
+                
+                <!-- Spotify Player -->
+                <div class="mt-12">
+                    <h3 class="text-xl font-semibold mb-4 neon-text-green">Currently Playing</h3>
+                    <iframe src="https://open.spotify.com/embed/track/7JQ9ELsV3FucPDWl0qjihX" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" class="rounded-lg"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links Section -->
+        <section id="links" class="py-16 px-6">
+            <div class="container mx-auto max-w-3xl">
+                <h2 class="text-3xl font-bold mb-12 neon-text-green text-center">Connect With Me</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <a href="https://discord.com/users/1289186305028259922" target="_blank" class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-blue hover:text-neon-blue border border-gray-800">
+                        <i class="fab fa-discord text-4xl mb-3"></i>
+                        <span class="font-medium">Discord</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/adem-alioua-5864ab370/" target="_blank" class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-blue hover:text-neon-blue border border-gray-800">
+                        <i class="fab fa-linkedin-in text-4xl mb-3"></i>
+                        <span class="font-medium">LinkedIn</span>
+                    </a>
+                    <a href="https://fr.fiverr.com/ademalioua" target="_blank" class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-green hover:text-neon-green border border-gray-800">
+                        <i class="fab fa-fonticons-fi text-4xl mb-3"></i>
+                        <span class="font-medium">Fiverr</span>
+                    </a>
+                    <a href="https://open.spotify.com/track/7JQ9ELsV3FucPDWl0qjihX" target="_blank" class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-green hover:text-neon-green border border-gray-800">
+                        <i class="fab fa-spotify text-4xl mb-3"></i>
+                        <span class="font-medium">Spotify</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark-gray py-8 px-6 border-t border-gray-800">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-400">&copy; 2025 L4stZ. All rights reserved.</p>
         </div>
-      </div>
-    </section>
+    </footer>
 
-    <!-- About Section -->
-    <section id="about" class="py-16 px-6 bg-transparent">
-      <div class="container mx-auto max-w-3xl">
-        <div class="section-overlay p-8">
-          <h2 class="text-3xl font-bold mb-8 neon-text-purple">About Me</h2>
-          <p class="text-lg mb-8 leading-relaxed neon-text-white">
-            I'm L4stZ, a specialist in technology and security research with deep expertise in system
-            analysis.
-          </p>
-
-          <!-- Spotify Player -->
-          <div class="mt-12">
-            <h3 class="text-xl font-semibold mb-4 neon-text-cyan">Currently Playing</h3>
-            <iframe
-              src="https://open.spotify.com/embed/track/7JQ9ELsV3FucPDWl0qjihX"
-              width="100%"
-              height="80"
-              frameborder="0"
-              allowtransparency="true"
-              allow="encrypted-media"
-              class="rounded-lg"
-            ></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Links Section -->
-    <section id="links" class="py-16 px-6 bg-transparent">
-      <div class="container mx-auto max-w-3xl">
-        <div class="section-overlay p-8">
-          <h2 class="text-3xl font-bold mb-12 neon-text-pink text-center">Connect With Me</h2>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <a
-              href="https://discord.com/users/1289186305028259922"
-              target="_blank"
-              class="social-link p-6 rounded-lg flex flex-col items-center justify-center border border-white/20"
-            >
-              <i class="fab fa-discord text-4xl mb-3"></i>
-              <span class="font-medium">Discord</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/adem-alioua-5864ab370/"
-              target="_blank"
-              class="social-link p-6 rounded-lg flex flex-col items-center justify-center border border-white/20"
-            >
-              <i class="fab fa-linkedin-in text-4xl mb-3"></i>
-              <span class="font-medium">LinkedIn</span>
-            </a>
-            <a
-              href="https://fr.fiverr.com/ademalioua"
-              target="_blank"
-              class="social-link p-6 rounded-lg flex flex-col items-center justify-center border border-white/20"
-            >
-              <i class="fab fa-fonticons-fi text-4xl mb-3"></i>
-              <span class="font-medium">Fiverr</span>
-            </a>
-            <a
-              href="https://open.spotify.com/track/7JQ9ELsV3FucPDWl0qjihX"
-              target="_blank"
-              class="social-link p-6 rounded-lg flex flex-col items-center justify-center border border-white/20"
-            >
-              <i class="fab fa-spotify text-4xl mb-3"></i>
-              <span class="font-medium">Spotify</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="py-8 px-6 border-t border-white/20 bg-transparent">
-    <div class="container mx-auto text-center text-white/80">
-      &copy; 2025 L4stZ. All rights reserved.
-    </div>
-  </footer>
-
-  <script>
-    // Mobile menu toggle functionality
-    document.querySelector("button").addEventListener("click", function () {
-      const nav = document.querySelector(".hidden.md\\:flex");
-      nav.classList.toggle("hidden");
-      nav.classList.toggle("flex");
-      nav.classList.toggle("flex-col");
-      nav.classList.toggle("absolute");
-      nav.classList.toggle("top-16");
-      nav.classList.toggle("right-6");
-      nav.classList.toggle("bg-dark");
-      nav.classList.toggle("p-4");
-      nav.classList.toggle("rounded-lg");
-      nav.classList.toggle("border");
-      nav.classList.toggle("border-gray-800");
-      nav.classList.toggle("space-y-4");
-    });
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute("href")).scrollIntoView({
-          behavior: "smooth",
+    <script>
+        // Mobile menu toggle functionality
+        document.querySelector('button').addEventListener('click', function() {
+            const nav = document.querySelector('.hidden.md\\:flex');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('flex');
+            nav.classList.toggle('flex-col');
+            nav.classList.toggle('absolute');
+            nav.classList.toggle('top-16');
+            nav.classList.toggle('right-6');
+            nav.classList.toggle('bg-dark');
+            nav.classList.toggle('p-4');
+            nav.classList.toggle('rounded-lg');
+            nav.classList.toggle('border');
+            nav.classList.toggle('border-gray-800');
+            nav.classList.toggle('space-y-4');
         });
-      });
-    });
 
-    // Enhanced video loading with smooth transitions
-    const video = document.getElementById('bg-video');
-    const loadingOverlay = document.getElementById('loadingOverlay');
-
-    // Smooth video loading animation
-    video.addEventListener('loadeddata', function() {
-      console.log('Video loaded successfully');
-      video.classList.add('loaded');
-      setTimeout(() => {
-        loadingOverlay.classList.add('hidden');
-      }, 500);
-    });
-
-    // Handle video loading errors with smooth fallback
-    video.addEventListener('error', function(e) {
-      console.log('Video failed to load, using gradient background');
-      loadingOverlay.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2d1b69 50%, #1a1a1a 100%)';
-      setTimeout(() => {
-        loadingOverlay.classList.add('hidden');
-      }, 1000);
-    });
-
-    // Ensure video plays on user interaction if autoplay fails
-    document.addEventListener('click', function() {
-      if (video.paused) {
-        video.play().catch(e => console.log('Video play failed:', e));
-      }
-    }, { once: true });
-
-    // Smooth scrolling performance optimization
-    let ticking = false;
-    
-    function updateVideoFilter() {
-      const scrollY = window.pageYOffset;
-      const brightness = Math.max(0.3, 0.4 - (scrollY * 0.0002));
-      video.style.filter = `brightness(${brightness}) saturate(1.3) contrast(1.1)`;
-      ticking = false;
-    }
-
-    window.addEventListener('scroll', function() {
-      if (!ticking) {
-        requestAnimationFrame(updateVideoFilter);
-        ticking = true;
-      }
-    });
-  </script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
