@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base target="_self">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L4stZ | Tech & Security Specialist</title>
-    <meta name="description" content="Personal portfolio of L4stZ, a tech specialist" />
+    <meta name="description" content="Personal portfolio of L4stZ, a tech specialist">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
@@ -19,20 +15,20 @@
                         dark: "#0a0a0a",
                         "neon-blue": "#00f0ff",
                         "neon-green": "#00ff9d",
-                        "dark-gray": "#1a1a1a",
+                        "dark-gray": "#1a1a1a"
                     },
                     fontFamily: {
-                        sans: ["Inter", "sans-serif"],
+                        sans: ['Inter', 'sans-serif'],
                     },
                     animation: {
-                        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-                    },
-                },
-            },
-        };
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
     </script>
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         body {
             scroll-behavior: smooth;
@@ -54,23 +50,9 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
         }
-
-        /* Matrix canvas styles */
-        #matrix {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1; /* Behind everything */
-            pointer-events: none; /* So it doesn't block clicks */
-        }
     </style>
 </head>
 <body class="bg-dark text-gray-200 font-sans min-h-screen flex flex-col">
-    <!-- Matrix Background Canvas -->
-    <canvas id="matrix"></canvas>
-
     <header class="sticky top-0 z-50 bg-dark/90 backdrop-blur-sm border-b border-gray-800">
         <div class="container mx-auto px-6 py-4">
             <nav class="flex justify-between items-center">
@@ -91,22 +73,12 @@
         <section class="py-20 md:py-32 px-6">
             <div class="container mx-auto text-center">
                 <h1 class="text-4xl md:text-6xl font-bold mb-4 neon-text-blue">L4stZ</h1>
-                <p class="text-xl md:text-2xl text-neon-green mb-2">
-                    A tech genius who will be remembered by the whole god damn world📍
-                </p>
+                <p class="text-xl md:text-2xl text-neon-green mb-2">A tech genius who will be remembered by the whole god damn world📍</p>
                 <p class="text-lg text-gray-400 mb-8">Tech Specialist | Security Researcher</p>
                 <p class="text-lg text-gray-400 mb-8">L4stZ never dies | I mogg you</p>
                 <div class="flex justify-center space-x-4">
-                    <a
-                        href="#about"
-                        class="px-6 py-3 bg-neon-blue text-dark font-medium rounded-full hover:bg-opacity-90 transition-all"
-                        >Learn More</a
-                    >
-                    <a
-                        href="#links"
-                        class="px-6 py-3 border border-neon-green text-neon-green font-medium rounded-full hover:bg-neon-green hover:bg-opacity-10 transition-all"
-                        >Connect</a
-                    >
+                    <a href="#about" class="px-6 py-3 bg-neon-blue text-dark font-medium rounded-full hover:bg-opacity-90 transition-all">Learn More</a>
+                    <a href="#links" class="px-6 py-3 border border-neon-green text-neon-green font-medium rounded-full hover:bg-neon-green hover:bg-opacity-10 transition-all">Connect</a>
                 </div>
             </div>
         </section>
@@ -115,23 +87,12 @@
         <section id="about" class="py-16 px-6 bg-dark-gray">
             <div class="container mx-auto max-w-3xl">
                 <h2 class="text-3xl font-bold mb-8 neon-text-blue">About Me</h2>
-                <p class="text-lg mb-8 leading-relaxed">
-                    I'm L4stZ, a specialist in technology and security research with deep expertise in
-                    system analysis.
-                </p>
+                <p class="text-lg mb-8 leading-relaxed">I'm L4stZ, a specialist in technology and security research with deep expertise in system analysis.</p>
 
-                <!-- Spotify Player -->
+                <!-- Video Embed -->
                 <div class="mt-12">
-                    <h3 class="text-xl font-semibold mb-4 neon-text-green">Currently Playing</h3>
-                    <iframe
-                        src="https://open.spotify.com/embed/track/7JQ9ELsV3FucPDWl0qjihX"
-                        width="100%"
-                        height="80"
-                        frameborder="0"
-                        allowtransparency="true"
-                        allow="encrypted-media"
-                        class="rounded-lg"
-                    ></iframe>
+                    <h3 class="text-xl font-semibold mb-4 neon-text-green">Featured Video</h3>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen class="rounded-lg"></iframe>
                 </div>
             </div>
         </section>
@@ -141,35 +102,19 @@
             <div class="container mx-auto max-w-3xl">
                 <h2 class="text-3xl font-bold mb-12 neon-text-green text-center">Connect With Me</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <a
-                        href="https://discord.com/users/1289186305028259922"
-                        target="_blank"
-                        class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-blue hover:text-neon-blue border border-gray-800"
-                    >
+                    <a href="https://discord.com/users/1289186305028259922" target="_blank" class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-blue hover:text-neon-blue border border-gray-800">
                         <i class="fab fa-discord text-4xl mb-3"></i>
                         <span class="font-medium">Discord</span>
                     </a>
-                    <a
-                        href="https://www.linkedin.com/in/adem-alioua-5864ab370/"
-                        target="_blank"
-                        class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-blue hover:text-neon-blue border border-gray-800"
-                    >
+                    <a href="https://www.linkedin.com/in/adem-alioua-5864ab370/" target="_blank" class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-blue hover:text-neon-blue border border-gray-800">
                         <i class="fab fa-linkedin-in text-4xl mb-3"></i>
                         <span class="font-medium">LinkedIn</span>
                     </a>
-                    <a
-                        href="https://fr.fiverr.com/ademalioua"
-                        target="_blank"
-                        class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-green hover:text-neon-green border border-gray-800"
-                    >
+                    <a href="https://fr.fiverr.com/ademalioua" target="_blank" class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-green hover:text-neon-green border border-gray-800">
                         <i class="fab fa-fonticons-fi text-4xl mb-3"></i>
                         <span class="font-medium">Fiverr</span>
                     </a>
-                    <a
-                        href="https://open.spotify.com/track/7JQ9ELsV3FucPDWl0qjihX"
-                        target="_blank"
-                        class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-green hover:text-neon-green border border-gray-800"
-                    >
+                    <a href="https://open.spotify.com/track/7JQ9ELsV3FucPDWl0qjihX" target="_blank" class="social-link bg-dark-gray p-6 rounded-lg flex flex-col items-center justify-center text-neon-green hover:text-neon-green border border-gray-800">
                         <i class="fab fa-spotify text-4xl mb-3"></i>
                         <span class="font-medium">Spotify</span>
                     </a>
@@ -186,83 +131,31 @@
 
     <script>
         // Mobile menu toggle functionality
-        document.querySelector("button").addEventListener("click", function () {
-            const nav = document.querySelector(".hidden.md\\:flex");
-            nav.classList.toggle("hidden");
-            nav.classList.toggle("flex");
-            nav.classList.toggle("flex-col");
-            nav.classList.toggle("absolute");
-            nav.classList.toggle("top-16");
-            nav.classList.toggle("right-6");
-            nav.classList.toggle("bg-dark");
-            nav.classList.toggle("p-4");
-            nav.classList.toggle("rounded-lg");
-            nav.classList.toggle("border");
-            nav.classList.toggle("border-gray-800");
-            nav.classList.toggle("space-y-4");
+        document.querySelector('button').addEventListener('click', function() {
+            const nav = document.querySelector('.hidden.md\\:flex');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('flex');
+            nav.classList.toggle('flex-col');
+            nav.classList.toggle('absolute');
+            nav.classList.toggle('top-16');
+            nav.classList.toggle('right-6');
+            nav.classList.toggle('bg-dark');
+            nav.classList.toggle('p-4');
+            nav.classList.toggle('rounded-lg');
+            nav.classList.toggle('border');
+            nav.classList.toggle('border-gray-800');
+            nav.classList.toggle('space-y-4');
         });
 
         // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-            anchor.addEventListener("click", function (e) {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                document
-                    .querySelector(this.getAttribute("href"))
-                    .scrollIntoView({
-                        behavior: "smooth",
-                    });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
-    </script>
-
-    <!-- Matrix Background Animation Script -->
-    <script>
-        const canvas = document.getElementById("matrix");
-        const ctx = canvas.getContext("2d");
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener("resize", () => {
-            resizeCanvas();
-            initDrops();
-        });
-
-        const binary = "01";
-        const fontSize = 16;
-        let columns = 0;
-        let drops = [];
-
-        function initDrops() {
-            columns = Math.floor(canvas.width / fontSize);
-            drops = [];
-            for (let x = 0; x < columns; x++) {
-                drops[x] = 1;
-            }
-        }
-        initDrops();
-
-        function draw() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = "#00ff00";
-            ctx.font = fontSize + "px monospace";
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = binary.charAt(Math.floor(Math.random() * binary.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-
-        setInterval(draw, 33);
     </script>
 </body>
 </html>
