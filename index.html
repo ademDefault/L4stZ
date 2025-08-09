@@ -1,279 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <base target="_self" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>L4stZ | Tech & Security Specialist</title>
-  <meta name="description" content="Personal portfolio of L4stZ, a tech specialist" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-  />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            dark: "#0a0a0a",
-            "neon-blue": "#00f0ff",
-            "neon-green": "#00ff9d",
-            "dark-gray": "rgba(0,0,0,0.6)",
-          },
-          fontFamily: {
-            sans: ["Inter", "sans-serif"],
-          },
-          animation: {
-            "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-          },
-        },
-      },
-    };
-  </script>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
-
-    body {
-      margin: 0;
-      scroll-behavior: smooth;
-      font-family: "Inter", sans-serif;
-      color: white;
-      position: relative;
-      min-height: 100vh;
-      background: black;
-      overflow-x: hidden;
-    }
-
-    /* Video Background */
-    #bg-video {
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      min-width: 100vw;
-      min-height: 100vh;
-      width: auto;
-      height: auto;
-      z-index: -1;
-      object-fit: cover;
-      filter: brightness(0.5) saturate(1.2);
-    }
-
-    /* Adjust colors and shadows for neon text on video */
-    .neon-text-blue {
-      color: #00f0ff;
-      text-shadow:
-        0 0 5px #00f0ff,
-        0 0 10px #00f0ff,
-        0 0 20px #00f0ff;
-    }
-
-    .neon-text-green {
-      color: #00ff9d;
-      text-shadow:
-        0 0 5px #00ff9d,
-        0 0 10px #00ff9d,
-        0 0 20px #00ff9d;
-    }
-
-    /* Container backgrounds made transparent or semi-transparent */
-    header,
-    main,
-    footer {
-      background: transparent !important;
-    }
-
-    header nav a:hover {
-      color: #00f0ff !important;
-    }
-
-    .social-link {
-      transition: all 0.3s ease;
-      background-color: rgba(0, 0, 0, 0.4);
-      border-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      text-shadow: 0 0 5px black;
-    }
-
-    .social-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 240, 255, 0.6);
-      color: #00f0ff !important;
-      border-color: #00f0ff !important;
-      background-color: rgba(0, 240, 255, 0.1);
-    }
-
-    /* Buttons */
-    a.px-6.py-3.bg-neon-blue {
-      background-color: #00f0ff;
-      color: #000;
-      box-shadow:
-        0 0 10px #00f0ff,
-        0 0 20px #00f0ff;
-    }
-    a.px-6.py-3.bg-neon-blue:hover {
-      background-color: #00c0d0;
-    }
-
-    a.px-6.py-3.border-neon-green {
-      border-color: #00ff9d;
-      color: #00ff9d;
-      text-shadow:
-        0 0 5px #00ff9d;
-    }
-    a.px-6.py-3.border-neon-green:hover {
-      background-color: rgba(0, 255, 157, 0.1);
-    }
-  </style>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L4stZ | Cybersecurity & Python Developer</title>
+    <meta name="description" content="L4stZ - A passionate explorer of technology, cybersecurity, and creative coding">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3b82f6",
+                        accent: "#10b981",
+                        dark: "#0f172a",
+                        darker: "#020617"
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .glow-on-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .glow-on-hover:hover {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+    </style>
 </head>
-<body class="font-sans min-h-screen flex flex-col">
-  <!-- Background Video -->
-  <video autoplay muted loop playsinline id="bg-video" preload="auto" poster="https://guns.lol/assets/img/deprived0-poster.webp">
-    <source src="https://guns.lol/assets/video/deprived0.webm" type="video/webm" />
-    <source src="https://guns.lol/assets/video/deprived0.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+<body class="bg-darker text-gray-300 font-sans">
+    <div id="root"></div>
 
-  <header class="sticky top-0 z-50 bg-transparent backdrop-blur-sm border-b border-white/20">
-    <div class="container mx-auto px-6 py-4">
-      <nav class="flex justify-between items-center">
-        <a href="#" class="text-xl font-bold neon-text-blue">L4stZ</a>
-        <div class="hidden md:flex space-x-8">
-          <a href="#about" class="hover:text-neon-blue transition-colors">About</a>
-          <a href="#links" class="hover:text-neon-green transition-colors">Links</a>
-        </div>
-        <button class="md:hidden text-neon-blue">
-          <i class="fas fa-bars text-2xl"></i>
-        </button>
-      </nav>
-    </div>
-  </header>
-
-  <main class="flex-grow">
-    <!-- Hero Section -->
-    <section class="py-20 md:py-32 px-6">
-      <div class="container mx-auto text-center">
-        <h1 class="text-4xl md:text-6xl font-bold mb-4 neon-text-blue">L4stZ</h1>
-        <p class="text-xl md:text-2xl neon-text-green mb-2">
-          A tech genius who will be remembered by the whole god damn world📍
-        </p>
-        <p class="text-lg text-white/80 mb-8">Tech Specialist | Security Researcher</p>
-        <p class="text-lg text-white/80 mb-8">L4stZ never dies | I mogg you</p>
-        <div class="flex justify-center space-x-4">
-          <a
-            href="#about"
-            class="px-6 py-3 bg-neon-blue text-dark font-medium rounded-full hover:bg-opacity-90 transition-all"
-            >Learn More</a
-          >
-          <a
-            href="#links"
-            class="px-6 py-3 border border-neon-green text-neon-green font-medium rounded-full hover:bg-neon-green hover:bg-opacity-10 transition-all"
-            >Connect</a
-          >
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 px-6 bg-transparent">
-      <div class="container mx-auto max-w-3xl">
-        <h2 class="text-3xl font-bold mb-8 neon-text-blue">About Me</h2>
-        <p class="text-lg mb-8 leading-relaxed text-white/90">
-          I'm L4stZ, a specialist in technology and security research with deep expertise in system
-          analysis.
-        </p>
-
-        <!-- Spotify Player -->
-        <div class="mt-12">
-          <h3 class="text-xl font-semibold mb-4 neon-text-green">Currently Playing</h3>
-          <iframe
-            src="https://open.spotify.com/embed/track/7JQ9ELsV3FucPDWl0qjihX"
-            width="100%"
-            height="80"
-            frameborder="0"
-            allowtransparency="true"
-            allow="encrypted-media"
-            class="rounded-lg"
-          ></iframe>
-        </div>
-      </div>
-    </section>
-
-    <!-- Links Section -->
-    <section id="links" class="py-16 px-6 bg-transparent">
-      <div class="container mx-auto max-w-3xl">
-        <h2 class="text-3xl font-bold mb-12 neon-text-green text-center">Connect With Me</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <a
-            href="https://discord.com/users/1289186305028259922"
-            target="_blank"
-            class="social-link p-6 rounded-lg flex flex-col items-center justify-center hover:text-neon-blue border border-white/20"
-          >
-            <i class="fab fa-discord text-4xl mb-3"></i>
-            <span class="font-medium">Discord</span>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/adem-alioua-5864ab370/"
-            target="_blank"
-            class="social-link p-6 rounded-lg flex flex-col items-center justify-center hover:text-neon-blue border border-white/20"
-          >
-            <i class="fab fa-linkedin-in text-4xl mb-3"></i>
-            <span class="font-medium">LinkedIn</span>
-          </a>
-          <a
-            href="https://fr.fiverr.com/ademalioua"
-            target="_blank"
-            class="social-link p-6 rounded-lg flex flex-col items-center justify-center hover:text-neon-green border border-white/20"
-          >
-            <i class="fab fa-fonticons-fi text-4xl mb-3"></i>
-            <span class="font-medium">Fiverr</span>
-          </a>
-          <a
-            href="https://open.spotify.com/track/7JQ9ELsV3FucPDWl0qjihX"
-            target="_blank"
-            class="social-link p-6 rounded-lg flex flex-col items-center justify-center hover:text-neon-green border border-white/20"
-          >
-            <i class="fab fa-spotify text-4xl mb-3"></i>
-            <span class="font-medium">Spotify</span>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="py-8 px-6 border-t border-white/20 bg-transparent">
-    <div class="container mx-auto text-center text-white/60">
-      &copy; 2025 L4stZ. All rights reserved.
-    </div>
-  </footer>
-
-  <script>
-    // Mobile menu toggle functionality
-    document.querySelector("button").addEventListener("click", function () {
-      const nav = document.querySelector(".hidden.md\\:flex");
-      nav.classList.toggle("hidden");
-      nav.classList.toggle("flex");
-      nav.classList.toggle("flex-col");
-      nav.classList.toggle("absolute");
-      nav.classList.toggle("top-16");
-      nav.classList.toggle("right-6");
-      nav.classList.toggle("bg-dark");
-      nav.classList.toggle("p-4");
-      nav.classList.toggle("rounded-lg");
-      nav.classList.toggle("border");
-      nav.classList.toggle("border-gray-800");
-      nav.classList.toggle("space-y-4");
-    });
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute("href")).scrollIntoView({
-          behavior: "smooth",
-        });
-      });
-    });
-  </script>
+    <script type="text/babel">
+        const { useState } = React;
+        
+        // Header Component
+        function Header() {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+            
+            return (
+                <header className="bg-dark shadow-sm sticky top-0 z-50 border-b border-gray-800">
+                    <div className="container mx-auto px-6 py-4">
+                        <div className="flex justify-between items-center">
+                            <a href="#" className="text-2xl font-bold gradient-text">L4stZ</a>
+                            
+                            <button 
+                                className="md:hidden focus:outline-none text-gray-400 hover:text-white"
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            >
+                                <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`}></i>
+                            </button>
+                            
+                            <nav className="hidden md:flex space-x-8">
+                                <a href="#about" className="font-medium hover:text-primary transition">About</a>
+                                <a href="#skills" className="font-medium hover:text-primary transition">Skills</a>
+                                <a href="#contact" className="font-medium hover:text-primary transition">Contact</a>
+                            </nav>
+                        </div>
+                        
+                        {isMenuOpen && (
+                            <div className="md:hidden mt-4 space-y-3">
+                                <a href="#about" className="block py-2 font-medium hover:text-primary transition">About</a>
+                                <a href="#skills" className="block py-2 font-medium hover:text-primary transition">Skills</a>
+                                <a href="#contact" className="block py-2 font-medium hover:text-primary transition">Contact</a>
+                            </div>
+                        )}
+                    </div>
+                </header>
+            );
+        }
+        
+        // Hero Component
+        function Hero() {
+            return (
+                <section className="py-20 bg-gradient-to-r from-dark to-darker">
+                    <div className="container mx-auto px-6 text-center">
+                        <div className="max-w-3xl mx-auto">
+                            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                                Hello, I'm <span className="gradient-text">L4stZ</span>
+                            </h1>
+                            <p className="text-xl md:text-2xl mb-8 text-gray-400">
+                                💻 Developer | 🔐 Cybersecurity Enthusiast | 🎨 Creative Thinker
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+        
+        // About Component
+        function About() {
+            return (
+                <section id="about" className="py-20 bg-dark">
+                    <div className="container mx-auto px-6">
+                        <div className="max-w-4xl mx-auto">
+                            <h2 className="text-3xl font-bold mb-12 text-center text-white">
+                                About <span className="gradient-text">Me</span>
+                            </h2>
+                            
+                            <div className="flex flex-col md:flex-row items-center gap-8">
+                                <div className="w-full md:w-1/3 flex justify-center">
+                                    <img 
+                                        src="https://i.pinimg.com/736x/8a/27/6c/8a276c8e59a21fc66f433ee19c167b0b.jpg" 
+                                        alt="L4stZ Profile" 
+                                        className="rounded-full w-64 h-64 object-cover border-4 border-primary/20 shadow-lg glow-on-hover"
+                                        loading="lazy"
+                                    />
+                                </div>
+                                
+                                <div className="w-full md:w-2/3">
+                                    <div className="prose prose-lg max-w-none text-gray-300">
+                                        <p className="text-lg mb-4">
+                                            <strong className="text-white">I'm L4stZ</strong> — a passionate explorer of technology, cybersecurity, and creative coding.
+                                        </p>
+                                        <p className="text-lg mb-4">
+                                            I thrive on turning ideas into reality, whether it's building sleek applications, uncovering security flaws, or crafting unique digital experiences.
+                                        </p>
+                                        <p className="text-lg mb-6">
+                                            I believe in learning without limits, mastering every challenge, and leaving my mark with both skill and style.
+                                        </p>
+                                        
+                                        <div className="flex flex-wrap gap-3 mb-6">
+                                            <span className="bg-gray-800 px-4 py-2 rounded-full text-sm font-medium flex items-center text-white">
+                                                <i className="fas fa-laptop-code mr-2 text-primary"></i> Developer
+                                            </span>
+                                            <span className="bg-gray-800 px-4 py-2 rounded-full text-sm font-medium flex items-center text-white">
+                                                <i className="fas fa-shield-alt mr-2 text-accent"></i> Cybersecurity Enthusiast
+                                            </span>
+                                            <span className="bg-gray-800 px-4 py-2 rounded-full text-sm font-medium flex items-center text-white">
+                                                <i className="fas fa-palette mr-2 text-secondary"></i> Creative Thinker
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+        
+        // Skills Component
+        function Skills() {
+            const skills = [
+                { name: "Python", icon: "fab fa-python", level: 85 },
+                { name: "Cybersecurity", icon: "fas fa-shield-alt", level: 80 }
+            ];
+            
+            return (
+                <section id="skills" className="py-20 bg-darker">
+                    <div className="container mx-auto px-6">
+                        <h2 className="text-3xl font-bold mb-12 text-center text-white">
+                            My <span className="gradient-text">Skills</span>
+                        </h2>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-md mx-auto">
+                            {skills.map((skill, index) => (
+                                <div key={index} className="bg-dark p-6 rounded-xl border border-gray-800 glow-on-hover">
+                                    <div className="flex items-center mb-4">
+                                        <i className={`${skill.icon} text-3xl mr-4 text-primary`}></i>
+                                        <h3 className="text-xl font-semibold text-white">{skill.name}</h3>
+                                    </div>
+                                    <div className="w-full bg-gray-800 rounded-full h-2.5">
+                                        <div 
+                                            className="bg-primary h-2.5 rounded-full" 
+                                            style={{ width: `${skill.level}%` }}
+                                        ></div>
+                                    </div>
+                                    <div className="mt-2 text-right text-sm text-gray-400">
+                                        {skill.level}%
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+        
+        // Contact Component
+        function Contact() {
+            return (
+                <section id="contact" className="py-20 bg-dark">
+                    <div className="container mx-auto px-6">
+                        <h2 className="text-3xl font-bold mb-12 text-center text-white">
+                            Get In <span className="gradient-text">Touch</span>
+                        </h2>
+                        
+                        <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="bg-darker p-6 rounded-xl border border-gray-800 text-center glow-on-hover">
+                                <i className="fas fa-envelope text-3xl text-primary mb-4"></i>
+                                <h3 className="text-lg font-semibold mb-2 text-white">Email</h3>
+                                <a href="mailto:contact@example.com" className="text-gray-400 hover:text-primary transition">contact@example.com</a>
+                            </div>
+                            <div className="bg-darker p-6 rounded-xl border border-gray-800 text-center glow-on-hover">
+                                <i className="fab fa-github text-3xl text-primary mb-4"></i>
+                                <h3 className="text-lg font-semibold mb-2 text-white">GitHub</h3>
+                                <a href="https://github.com" className="text-gray-400 hover:text-primary transition">github.com/L4stZ</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+        
+        // Footer Component
+        function Footer() {
+            const socialLinks = [
+                { icon: "fab fa-github", url: "#" },
+                { icon: "fab fa-twitter", url: "#" },
+                { icon: "fab fa-linkedin-in", url: "#" }
+            ];
+            
+            return (
+                <footer className="bg-darker border-t border-gray-800 py-8">
+                    <div className="container mx-auto px-6">
+                        <div className="flex flex-col items-center">
+                            <div className="flex space-x-6 mb-4">
+                                {socialLinks.map((link, index) => (
+                                    <a 
+                                        key={index} 
+                                        href={link.url} 
+                                        className="text-gray-400 hover:text-white text-xl transition"
+                                    >
+                                        <i className={link.icon}></i>
+                                    </a>
+                                ))}
+                            </div>
+                            <p className="text-gray-500 text-sm">
+                                &copy; {new Date().getFullYear()} L4stZ. All rights reserved.
+                            </p>
+                        </div>
+                    </div>
+                </footer>
+            );
+        }
+        
+        // App Component
+        function App() {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <main className="flex-grow">
+                        <Hero />
+                        <About />
+                        <Skills />
+                        <Contact />
+                    </main>
+                    <Footer />
+                </div>
+            );
+        }
+        
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
 </body>
 </html>
