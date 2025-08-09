@@ -2,55 +2,66 @@
 <html lang="en">
 <head>
     <base target="_self">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>L4stZ | Tech & Security Specialist</title>
-    <meta name="description" content="Personal portfolio of L4stZ, a tech specialist">
+    <meta name="description" content="Personal portfolio of L4stZ, a tech specialist" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: "#0a0a0a",
-                        "neon-blue": "#00f0ff",
-                        "neon-green": "#00ff9d",
-                        "dark-gray": "#1a1a1a"
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: "#0a0a0a",
+              "neon-blue": "#00f0ff",
+              "neon-green": "#00ff9d",
+              "dark-gray": "#1a1a1a",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            animation: {
+              "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+          },
+        },
+      };
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            scroll-behavior: smooth;
-        }
-        
-        .neon-text-blue {
-            text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
-        }
-        
-        .neon-text-green {
-            text-shadow: 0 0 5px rgba(0, 255, 157, 0.5);
-        }
-        
-        .social-link {
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
-        }
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+      body {
+        scroll-behavior: smooth;
+      }
+
+      .neon-text-blue {
+        text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+      }
+
+      .neon-text-green {
+        text-shadow: 0 0 5px rgba(0, 255, 157, 0.5);
+      }
+
+      .social-link {
+        transition: all 0.3s ease;
+      }
+
+      .social-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+      }
+
+      /* Tilted Card Styles */
+      .tilted-card {
+        perspective: 1000px;
+      }
+      .tilted-card:hover {
+        box-shadow: 0 15px 35px rgba(255, 0, 0, 0.5);
+      }
     </style>
 </head>
 <body class="bg-dark text-gray-200 font-sans min-h-screen flex flex-col">
@@ -80,6 +91,25 @@
                 <div class="flex justify-center space-x-4">
                     <a href="#about" class="px-6 py-3 bg-neon-blue text-dark font-medium rounded-full hover:bg-opacity-90 transition-all">Learn More</a>
                     <a href="#links" class="px-6 py-3 border border-neon-green text-neon-green font-medium rounded-full hover:bg-neon-green hover:bg-opacity-10 transition-all">Connect</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tilted Card Section -->
+        <section class="py-16 px-6 bg-dark-gray flex justify-center">
+            <div
+              class="tilted-card group relative w-80 h-96 rounded-xl shadow-lg overflow-hidden cursor-pointer bg-gradient-to-br from-red-900 via-red-700 to-red-900 transform transition-transform duration-500 hover:rotate-3 hover:scale-105"
+            >
+                <img
+                  src="https://i.imgur.com/8qMccZ8.png"
+                  alt="Hacker Red Hat"
+                  class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity duration-500"
+                />
+                <div
+                  class="relative z-10 flex flex-col justify-end h-full p-6 bg-gradient-to-t from-black/70 to-transparent text-white"
+                >
+                    <h3 class="text-3xl font-extrabold mb-2 tracking-wide">L4stZ-R2S</h3>
+                    <p class="text-sm uppercase tracking-widest text-red-400">Hacker Profile</p>
                 </div>
             </div>
         </section>
@@ -131,32 +161,32 @@
     </footer>
 
     <script>
-        // Mobile menu toggle functionality
-        document.querySelector('button').addEventListener('click', function() {
-            const nav = document.querySelector('.hidden.md\\:flex');
-            nav.classList.toggle('hidden');
-            nav.classList.toggle('flex');
-            nav.classList.toggle('flex-col');
-            nav.classList.toggle('absolute');
-            nav.classList.toggle('top-16');
-            nav.classList.toggle('right-6');
-            nav.classList.toggle('bg-dark');
-            nav.classList.toggle('p-4');
-            nav.classList.toggle('rounded-lg');
-            nav.classList.toggle('border');
-            nav.classList.toggle('border-gray-800');
-            nav.classList.toggle('space-y-4');
-        });
+      // Mobile menu toggle functionality
+      document.querySelector("button").addEventListener("click", function () {
+        const nav = document.querySelector(".hidden.md\\:flex");
+        nav.classList.toggle("hidden");
+        nav.classList.toggle("flex");
+        nav.classList.toggle("flex-col");
+        nav.classList.toggle("absolute");
+        nav.classList.toggle("top-16");
+        nav.classList.toggle("right-6");
+        nav.classList.toggle("bg-dark");
+        nav.classList.toggle("p-4");
+        nav.classList.toggle("rounded-lg");
+        nav.classList.toggle("border");
+        nav.classList.toggle("border-gray-800");
+        nav.classList.toggle("space-y-4");
+      });
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
         });
+      });
     </script>
 </body>
 </html>
