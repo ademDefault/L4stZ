@@ -31,6 +31,7 @@
       },
     };
   </script>
+
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
@@ -65,6 +66,79 @@
       }
       100% {
         background-position: 0% 50%;
+      }
+    }
+
+    /* Split text animation styles */
+    .split-text {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .split-text span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: slide-up 0.5s forwards;
+    }
+
+    .split-text span:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .split-text span:nth-child(2) {
+      animation-delay: 0.05s;
+    }
+    .split-text span:nth-child(3) {
+      animation-delay: 0.1s;
+    }
+    .split-text span:nth-child(4) {
+      animation-delay: 0.15s;
+    }
+    .split-text span:nth-child(5) {
+      animation-delay: 0.2s;
+    }
+    .split-text span:nth-child(6) {
+      animation-delay: 0.25s;
+    }
+    .split-text span:nth-child(7) {
+      animation-delay: 0.3s;
+    }
+    .split-text span:nth-child(8) {
+      animation-delay: 0.35s;
+    }
+    .split-text span:nth-child(9) {
+      animation-delay: 0.4s;
+    }
+    .split-text span:nth-child(10) {
+      animation-delay: 0.45s;
+    }
+    .split-text span:nth-child(11) {
+      animation-delay: 0.5s;
+    }
+    .split-text span:nth-child(12) {
+      animation-delay: 0.55s;
+    }
+    .split-text span:nth-child(13) {
+      animation-delay: 0.6s;
+    }
+    .split-text span:nth-child(14) {
+      animation-delay: 0.65s;
+    }
+    .split-text span:nth-child(15) {
+      animation-delay: 0.7s;
+    }
+    .split-text span:nth-child(16) {
+      animation-delay: 0.75s;
+    }
+    .split-text span:nth-child(17) {
+      animation-delay: 0.8s;
+    }
+
+    @keyframes slide-up {
+      to {
+        opacity: 1;
+        transform: translateY(0%);
       }
     }
 
@@ -113,8 +187,21 @@
     <!-- Hero Section -->
     <section class="py-20 md:py-32 px-6">
       <div class="container mx-auto text-center">
+        <!-- Split text animation above hero title -->
+        <h2 class="split-text text-neon-green text-2xl md:text-3xl font-semibold mb-4">
+          <!-- Each letter wrapped in span for animation -->
+          <span>W</span><span>e</span><span>l</span><span>c</span><span>o</span><span>m</span><span>e</span>
+          <span> </span>
+          <span>t</span><span>o</span>
+          <span> </span>
+          <span>m</span><span>y</span>
+          <span> </span>
+          <span>w</span><span>o</span><span>r</span><span>l</span><span>d</span>
+        </h2>
+
         <!-- Animated gradient text for hero title -->
         <h1 class="gradient-text mb-4">L4stZ</h1>
+
         <p class="text-xl md:text-2xl text-neon-green mb-2">
           A tech genius who will be remembered by the whole god damn world📍
         </p>
