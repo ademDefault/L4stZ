@@ -69,11 +69,13 @@
       }
     }
 
-    /* Split text animation styles */
+    /* Split text animation styles with bigger font */
     .split-text {
       display: inline-block;
       overflow: hidden;
       white-space: nowrap;
+      font-size: 3.5rem; /* BIGGER font size */
+      font-weight: 600;
     }
 
     .split-text span {
@@ -83,6 +85,7 @@
       animation: slide-up 0.5s forwards;
     }
 
+    /* Delay each letter's animation */
     .split-text span:nth-child(1) {
       animation-delay: 0s;
     }
@@ -187,9 +190,8 @@
     <!-- Hero Section -->
     <section class="py-20 md:py-32 px-6">
       <div class="container mx-auto text-center">
-        <!-- Split text animation above hero title -->
-        <h2 class="split-text text-neon-green text-2xl md:text-3xl font-semibold mb-4">
-          <!-- Each letter wrapped in span for animation -->
+        <!-- BIGGER split text animation above hero title -->
+        <h2 class="split-text text-neon-green mb-6 font-semibold">
           <span>W</span><span>e</span><span>l</span><span>c</span><span>o</span><span>m</span><span>e</span>
           <span> </span>
           <span>t</span><span>o</span>
