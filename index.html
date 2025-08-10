@@ -18,12 +18,35 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
 
+    /* Default dark theme colors */
+    :root {
+      --bg-color: #000000;
+      --text-color: #d1d5db;
+      --card-bg: #1f2937;
+      --header-bg: #0f172a;
+      --section-bg: #000000;
+      --link-hover: #3b82f6;
+      --shadow-color: rgba(59, 130, 246, 0.4);
+    }
+
+    /* Light theme overrides */
+    body[data-theme="light"] {
+      --bg-color: #f9fafb;
+      --text-color: #1f2937;
+      --card-bg: #e5e7eb;
+      --header-bg: #f3f4f6;
+      --section-bg: #ffffff;
+      --link-hover: #2563eb;
+      --shadow-color: rgba(37, 99, 235, 0.4);
+    }
+
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #000000;
-      color: #d1d5db;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       margin: 0;
       padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .gradient-text {
@@ -39,26 +62,26 @@
     }
 
     .glow-on-hover:hover {
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+      box-shadow: 0 0 15px var(--shadow-color);
     }
 
     /* Profile Card */
     .profile-card {
       max-width: 22rem;
-      background: #1f2937;
-      color: white;
+      background: var(--card-bg);
+      color: var(--text-color);
       border-radius: 1rem;
       overflow: visible;
       padding: 1.5rem 1.5rem 2.5rem 1.5rem;
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 0 10px var(--shadow-color);
+      transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
       position: relative;
       margin: auto;
       flex-shrink: 0;
     }
 
     .profile-card:hover {
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.7);
+      box-shadow: 0 0 20px var(--shadow-color);
       transform: scale(1.03);
     }
 
@@ -66,15 +89,15 @@
       width: 9rem;
       height: 9rem;
       border-radius: 9999px;
-      border: 4px solid white;
+      border: 4px solid var(--bg-color);
       object-fit: cover;
       position: absolute;
       left: 50%;
       top: -4.5rem;
       transform: translateX(-50%);
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+      box-shadow: 0 0 10px var(--shadow-color);
       transition: transform 0.5s ease;
-      background: black;
+      background: var(--bg-color);
     }
 
     .profile-card:hover img {
@@ -84,11 +107,11 @@
     @keyframes pulse {
       0%, 100% {
         transform: translateX(-50%) scale(1);
-        box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+        box-shadow: 0 0 10px var(--shadow-color);
       }
       50% {
         transform: translateX(-50%) scale(1.05);
-        box-shadow: 0 0 20px rgba(59, 130, 246, 0.7);
+        box-shadow: 0 0 20px var(--shadow-color);
       }
     }
 
@@ -104,7 +127,7 @@
     .profile-card p {
       margin-top: 1rem;
       text-align: center;
-      color: #d1d5db;
+      color: var(--text-color);
       font-size: 1rem;
       line-height: 1.5;
     }
@@ -142,6 +165,8 @@
     section {
       padding-top: 2rem;
       padding-bottom: 2rem;
+      background-color: var(--section-bg);
+      transition: background-color 0.3s ease;
     }
 
     /* Container max width adjustments */
@@ -150,13 +175,35 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+    /* Theme toggle button */
+    #theme-toggle-btn {
+      background: transparent;
+      border: 2px solid var(--text-color);
+      color: var(--text-color);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    #theme-toggle-btn:hover {
+      background-color: var(--text-color);
+      color: var(--bg-color);
+      border-color: var(--text-color);
+    }
+
   </style>
 </head>
 
 <body>
 
   <!-- Header -->
-  <header class="bg-[#0f172a] sticky top-0 z-50 border-b border-gray-800 shadow-sm">
+  <header class="sticky top-0 z-50 border-b border-gray-800 shadow-sm" style="background-color: var(--header-bg); transition: background-color 0.3s ease;">
     <div class="container px-6 py-4 flex justify-between items-center">
       <a href="#" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500">
         L4stZ
@@ -166,6 +213,11 @@
         <a href="#skills" class="font-medium hover:text-blue-500 transition">Skills</a>
         <a href="#contact" class="font-medium hover:text-blue-500 transition">Contact</a>
       </nav>
+
+      <!-- Theme Toggle Button -->
+      <button id="theme-toggle-btn" aria-label="Toggle Dark/Light Theme">
+        <i class="fas fa-moon"></i> Dark Mode
+      </button>
     </div>
   </header>
 
@@ -196,9 +248,9 @@
       </div>
 
       <!-- About Text -->
-      <div class="text-gray-300 md:w-2/3 text-lg">
+      <div class="md:w-2/3 text-lg" style="color: var(--text-color);">
         <p class="mb-4">
-          <strong class="text-white">I'm L4stZ</strong> — a passionate explorer of technology, cybersecurity, and creative coding.
+          <strong>I'm L4stZ</strong> — a passionate explorer of technology, cybersecurity, and creative coding.
         </p>
         <p class="mb-4">
           I thrive on turning ideas into reality, whether it's building sleek applications, uncovering security flaws, or crafting unique digital experiences.
@@ -208,13 +260,13 @@
         </p>
 
         <div class="flex flex-wrap gap-3 mt-6">
-          <span class="bg-gray-800 px-4 py-2 rounded-full text-sm font-medium flex items-center">
+          <span class="px-4 py-2 rounded-full text-sm font-medium flex items-center" style="background-color: var(--card-bg); color: var(--text-color);">
             <i class="fas fa-laptop-code mr-2 text-blue-500"></i> Developer
           </span>
-          <span class="bg-gray-800 px-4 py-2 rounded-full text-sm font-medium flex items-center">
+          <span class="px-4 py-2 rounded-full text-sm font-medium flex items-center" style="background-color: var(--card-bg); color: var(--text-color);">
             <i class="fas fa-shield-alt mr-2 text-green-500"></i> Cybersecurity Enthusiast
           </span>
-          <span class="bg-gray-800 px-4 py-2 rounded-full text-sm font-medium flex items-center">
+          <span class="px-4 py-2 rounded-full text-sm font-medium flex items-center" style="background-color: var(--card-bg); color: var(--text-color);">
             <i class="fas fa-palette mr-2 text-purple-500"></i> Creative Thinker
           </span>
         </div>
@@ -223,38 +275,38 @@
   </section>
 
   <!-- Skills Section -->
-  <section id="skills" class="bg-black max-w-5xl mx-auto px-6">
+  <section id="skills" class="max-w-5xl mx-auto px-6" style="background-color: var(--section-bg);">
     <h2 class="text-4xl font-bold mb-10 text-center shiny-text" id="skills-title">
       My <span class="gradient-text">Skills</span>
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-md mx-auto mb-12">
-      <div class="bg-[#0f172a] p-6 rounded-xl border border-gray-800 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/50">
+      <div class="bg-[var(--card-bg)] p-6 rounded-xl border border-gray-800 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/50">
         <div class="flex items-center mb-4">
           <i class="fab fa-python text-3xl mr-4 text-blue-500"></i>
-          <h3 class="text-xl font-semibold text-white">Python</h3>
+          <h3 class="text-xl font-semibold" style="color: var(--text-color);">Python</h3>
         </div>
         <div class="w-full bg-gray-800 rounded-full h-2.5">
           <div class="bg-blue-500 h-2.5 rounded-full" style="width: 85%;"></div>
         </div>
-        <div class="mt-2 text-right text-sm text-gray-400">85%</div>
+        <div class="mt-2 text-right text-sm" style="color: #9ca3af;">85%</div>
       </div>
 
-      <div class="bg-[#0f172a] p-6 rounded-xl border border-gray-800 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/50">
+      <div class="bg-[var(--card-bg)] p-6 rounded-xl border border-gray-800 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/50">
         <div class="flex items-center mb-4">
           <i class="fas fa-shield-alt text-3xl mr-4 text-green-500"></i>
-          <h3 class="text-xl font-semibold text-white">Cybersecurity</h3>
+          <h3 class="text-xl font-semibold" style="color: var(--text-color);">Cybersecurity</h3>
         </div>
         <div class="w-full bg-gray-800 rounded-full h-2.5">
           <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%;"></div>
         </div>
-        <div class="mt-2 text-right text-sm text-gray-400">80%</div>
+        <div class="mt-2 text-right text-sm" style="color: #9ca3af;">80%</div>
       </div>
     </div>
   </section>
 
   <!-- Spotify Player Section -->
-  <section class="bg-black max-w-5xl mx-auto px-6 mb-12">
+  <section class="max-w-5xl mx-auto px-6 mb-12" style="background-color: var(--section-bg);">
     <h2 class="text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 shiny-text" id="spotify-title">
       Currently Playing
     </h2>
@@ -271,29 +323,29 @@
   </section>
 
   <!-- Connect With Me Section -->
-  <section class="bg-black max-w-5xl mx-auto px-6">
+  <section class="max-w-5xl mx-auto px-6" style="background-color: var(--section-bg);">
     <h2 class="text-3xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 shiny-text" id="connect-title">
       Connect With Me
     </h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
       <a href="https://discord.com/users/1289186305028259922" target="_blank" rel="noopener noreferrer"
-         class="bg-[#0f172a] p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover text-gray-300">
+         class="p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover" style="background-color: var(--card-bg); color: var(--text-color);">
         <i class="fab fa-discord text-4xl text-green-400 mb-3"></i>
         <span>Discord</span>
       </a>
       <a href="https://www.linkedin.com/in/adem-alioua-5864ab370/" target="_blank" rel="noopener noreferrer"
-         class="bg-[#0f172a] p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover text-gray-300">
+         class="p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover" style="background-color: var(--card-bg); color: var(--text-color);">
         <i class="fab fa-linkedin text-4xl text-green-400 mb-3"></i>
         <span>LinkedIn</span>
       </a>
       <a href="https://fr.fiverr.com/ademalioua/buying?source=avatar_menu_profile" target="_blank" rel="noopener noreferrer"
-         class="bg-[#0f172a] p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover text-gray-300">
+         class="p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover" style="background-color: var(--card-bg); color: var(--text-color);">
         <i class="fas fa-star text-4xl text-green-400 mb-3"></i>
         <span>Fiverr</span>
       </a>
       <a href="https://open.spotify.com/user/31uoxwjzahpnr3sazpwqt2em3lc4" target="_blank" rel="noopener noreferrer"
-         class="bg-[#0f172a] p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover text-gray-300">
+         class="p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover" style="background-color: var(--card-bg); color: var(--text-color);">
         <i class="fab fa-spotify text-4xl text-green-400 mb-3"></i>
         <span>Spotify</span>
       </a>
@@ -301,38 +353,63 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="bg-[#0f172a] max-w-5xl mx-auto px-6 mb-12">
-    <h2 class="text-3xl font-bold mb-10 text-center text-white shiny-text" id="contact-title">
+  <section id="contact" class="max-w-5xl mx-auto px-6 mb-12" style="background-color: var(--header-bg); color: var(--text-color);">
+    <h2 class="text-3xl font-bold mb-10 text-center shiny-text" id="contact-title">
       Get In <span class="gradient-text">Touch</span>
     </h2>
 
     <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
       <div
-        class="bg-black p-6 rounded-xl border border-gray-800 text-center glow-on-hover text-gray-400 hover:text-blue-500 transition">
+        class="p-6 rounded-xl border border-gray-800 text-center glow-on-hover hover:text-blue-500 transition" style="background-color: var(--card-bg); color: var(--text-color);">
         <i class="fas fa-envelope text-3xl text-blue-500 mb-4"></i>
-        <h3 class="text-lg font-semibold mb-2 text-white">Email</h3>
-        <a href="mailto:aliouaadem345@gmail.com" class="hover:underline">aliouaadem345@gmail.com</a>
+        <h3 class="text-lg font-semibold mb-2">Email</h3>
+        <a href="mailto:aliouaadem345@gmail.com" class="hover:underline" style="color: var(--text-color);">aliouaadem345@gmail.com</a>
       </div>
       <div
-        class="bg-black p-6 rounded-xl border border-gray-800 text-center glow-on-hover text-gray-400 hover:text-blue-500 transition">
+        class="p-6 rounded-xl border border-gray-800 text-center glow-on-hover hover:text-blue-500 transition" style="background-color: var(--card-bg); color: var(--text-color);">
         <i class="fab fa-github text-3xl text-blue-500 mb-4"></i>
-        <h3 class="text-lg font-semibold mb-2 text-white">GitHub</h3>
-        <a href="https://github.com" class="hover:underline" target="_blank" rel="noopener noreferrer">github.com/L4stZ</a>
+        <h3 class="text-lg font-semibold mb-2">GitHub</h3>
+        <a href="https://github.com" class="hover:underline" target="_blank" rel="noopener noreferrer" style="color: var(--text-color);">github.com/L4stZ</a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-black border-t border-gray-800 py-8">
+  <footer class="border-t border-gray-800 py-8" style="background-color: var(--section-bg); color: var(--text-color);">
     <div class="container px-6 flex flex-col items-center">
       <div class="flex space-x-6 mb-4">
-        <a href="#" class="text-gray-400 hover:text-white text-xl transition"><i class="fab fa-github"></i></a>
-        <a href="#" class="text-gray-400 hover:text-white text-xl transition"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="text-gray-400 hover:text-white text-xl transition"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="hover:text-white text-xl transition" style="color: var(--text-color);"><i class="fab fa-github"></i></a>
+        <a href="#" class="hover:text-white text-xl transition" style="color: var(--text-color);"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-white text-xl transition" style="color: var(--text-color);"><i class="fab fa-linkedin-in"></i></a>
       </div>
-      <p class="text-gray-500 text-sm">&copy; 2025 L4stZ. All rights reserved.</p>
+      <p class="text-sm">&copy; 2025 L4stZ. All rights reserved.</p>
     </div>
   </footer>
 
+  <script>
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const body = document.body;
+
+    // Initialize theme from localStorage or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
+    });
+
+    function setTheme(theme) {
+      if (theme === 'light') {
+        body.setAttribute('data-theme', 'light');
+        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+      }
+      localStorage.setItem('theme', theme);
+    }
+  </script>
 </body>
 </html>
