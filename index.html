@@ -1,199 +1,204 @@
-import { useState, useRef } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useProducts } from '@/hooks/useProducts';
-import { useAdmin } from '@/hooks/useAdmin';
-import { X, Upload, Image as ImageIcon } from 'lucide-react';
-
-export default function ProductForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    price: '',
-    description: '',
-    category: ''
-  });
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string>('');
-  const [error, setError] = useState('');
-  
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const { addProduct } = useProducts();
-  const { setShowProductForm } = useAdmin();
-
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-      if (!validTypes.includes(file.type)) {
-        setError('Please select a valid image file (JPG, PNG, GIF, or WebP)');
-        return;
-      }
-      if (file.size > 5 * 1024 * 1024) {
-        setError('Image file size must be less than 5MB');
-        return;
-      }
-
-      setError('');
-      setImageFile(file);
-      
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImagePreview(e.target?.result as string);
-      };
-      reader.readAsDataURL(file);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clean Combo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
     }
-  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.name && formData.price && formData.description && formData.category) {
-      // Use preview image or fallback logo
-      const imageUrl = imagePreview || 'YOUR_LOGO_URL_HERE';
-      
-      addProduct({
-        name: formData.name,
-        price: parseFloat(formData.price),
-        description: formData.description,
-        image: imageUrl,
-        category: formData.category,
-        isNew: true
-      });
-      
-      setFormData({ name: '', price: '', description: '', category: '' });
-      setImageFile(null);
-      setImagePreview('');
-      setError('');
-      setShowProductForm(false);
+    header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 20px;
+      background: #000;
     }
-  };
 
-  return (
-    <Dialog open={true} onOpenChange={() => setShowProductForm(false)}>
-      <DialogContent className="bg-gray-900/95 backdrop-blur-xl border-white/10 text-white max-w-md mx-4 max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-xl">Add New Product</DialogTitle>
-          <button
-            onClick={() => setShowProductForm(false)}
-            className="absolute right-4 top-4 text-gray-400 hover:text-white transition-colors duration-300"
-          >
-            <X size={20} />
-          </button>
-        </DialogHeader>
-        
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <Input
-            placeholder="Product Name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-emerald-500 transition-colors duration-300"
-            required
-          />
+    header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
 
-          <Input
-            type="number"
-            placeholder="Price"
-            value={formData.price}
-            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-            className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-emerald-500 transition-colors duration-300"
-            required
-          />
+    h1 {
+      font-size: 24px;
+      margin: 0;
+    }
 
-          <Textarea
-            placeholder="Description"
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 min-h-20 focus:border-emerald-500 transition-colors duration-300"
-            required
-          />
+    .welcome {
+      padding: 20px;
+      text-align: center;
+    }
 
-          {/* Image Upload Section */}
-          <div className="space-y-3">
-            <label className="text-sm font-medium text-gray-300">Product Image</label>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleFileSelect}
-              className="hidden"
-            />
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => fileInputRef.current?.click()}
-              className="w-full border-white/10 text-white hover:bg-white/5 transition-all duration-300 flex items-center gap-2"
-            >
-              <Upload size={16} />
-              {imageFile ? 'Change Image' : 'Upload Image'}
-            </Button>
-            
-            {imagePreview ? (
-              <div className="relative">
-                <img
-                  src={imagePreview}
-                  alt="Product preview"
-                  className="w-full h-32 object-contain rounded-lg border border-white/10"
-                />
-                <button
-                  type="button"
-                  onClick={() => {
-                    setImageFile(null);
-                    setImagePreview('');
-                  }}
-                  className="absolute top-2 right-2 bg-red-500/80 hover:bg-red-500 text-white rounded-full p-1 transition-colors duration-300"
-                >
-                  <X size={14} />
-                </button>
-              </div>
-            ) : (
-              <div className="w-full h-32 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center">
-                <img
-                  src="YOUR_LOGO_URL_HERE"
-                  alt="Default logo"
-                  className="h-20 object-contain"
-                />
-              </div>
-            )}
-            
-            {error && <p className="text-red-400 text-sm">{error}</p>}
-          </div>
+    .welcome h2 {
+      font-size: 22px;
+    }
 
-          <Select
-            value={formData.category}
-            onValueChange={(value) => setFormData({ ...formData, category: value })}
-          >
-            <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-emerald-500 transition-colors duration-300">
-              <SelectValue placeholder="Select Category" />
-            </SelectTrigger>
-            <SelectContent className="bg-gray-800 border-gray-700">
-              <SelectItem value="Courses">Courses</SelectItem>
-              <SelectItem value="Templates">Templates</SelectItem>
-              <SelectItem value="Tools">Tools</SelectItem>
-              <SelectItem value="Guides">Guides</SelectItem>
-              <SelectItem value="Other">Other</SelectItem>
-            </SelectContent>
-          </Select>
+    .form-section {
+      max-width: 400px;
+      margin: 20px auto;
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+    }
 
-          <div className="flex gap-3 pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setShowProductForm(false)}
-              className="flex-1 border-white/10 text-white hover:bg-white/5 transition-all duration-300"
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white transition-all duration-500 hover:scale-105 transform"
-            >
-              Add Product
-            </Button>
-          </div>
-        </form>
-      </DialogContent>
-    </Dialog>
-  );
-}
+    .form-section input,
+    .form-section textarea,
+    .form-section button {
+      width: 100%;
+      margin: 8px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+    }
+
+    .form-section input,
+    .form-section textarea {
+      background: #333;
+      color: white;
+    }
+
+    .form-section button {
+      background: #10b981;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .form-section button:hover {
+      background: #059669;
+    }
+
+    .products {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 10px;
+    }
+
+    .product-card {
+      background: #222;
+      padding: 15px;
+      border-radius: 10px;
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .product-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .contact {
+      background: #000;
+      padding: 20px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .contact a {
+      display: inline-block;
+      margin: 0 10px;
+      color: #10b981;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact a:hover {
+      color: #34d399;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <img src="https://i.imgur.com/MR3lQ5x.png" alt="Clean Combo Logo">
+    <h1>Clean Combo</h1>
+  </header>
+
+  <!-- Welcome -->
+  <section class="welcome">
+    <h2>👋 Welcome to Clean Combo!</h2>
+    <p>
+      ✨ Simple, powerful, and creative digital solutions.<br>
+      We create easy-to-use resources, guides, and tools designed to help learners,
+      creators, and entrepreneurs save time and unlock their potential.
+    </p>
+  </section>
+
+  <!-- Product Form -->
+  <section class="form-section">
+    <h2>Add Product</h2>
+    <form id="productForm">
+      <input type="text" id="name" placeholder="Product Name" required>
+      <input type="number" id="price" placeholder="Price" required>
+      <textarea id="description" placeholder="Description" required></textarea>
+      <input type="file" id="image" accept="image/*">
+      <button type="submit">Add Product</button>
+    </form>
+  </section>
+
+  <!-- Product List -->
+  <section class="products" id="products"></section>
+
+  <!-- Contact -->
+  <section class="contact">
+    <p>📩 Contact us:</p>
+    <a href="https://instagram.com/CC.digital" target="_blank">Instagram</a>
+    <a href="mailto:aliouaadem345@gmail.com">Email</a>
+  </section>
+
+  <script>
+    const productForm = document.getElementById("productForm");
+    const productsContainer = document.getElementById("products");
+
+    productForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const price = document.getElementById("price").value;
+      const description = document.getElementById("description").value;
+      const imageInput = document.getElementById("image");
+
+      let imageURL = "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400";
+
+      if (imageInput.files && imageInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          addProduct(name, price, description, event.target.result);
+        };
+        reader.readAsDataURL(imageInput.files[0]);
+      } else {
+        addProduct(name, price, description, imageURL);
+      }
+
+      productForm.reset();
+    });
+
+    function addProduct(name, price, description, image) {
+      const productCard = document.createElement("div");
+      productCard.className = "product-card";
+
+      productCard.innerHTML = `
+        <img src="${image}" alt="${name}">
+        <div>
+          <h3>${name}</h3>
+          <p>$${price}</p>
+          <p>${description}</p>
+        </div>
+      `;
+
+      productsContainer.appendChild(productCard);
+    }
+  </script>
+</body>
+</html>
