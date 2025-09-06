@@ -1,416 +1,199 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Adem  | Cybersecurity & Python Developer</title>
-  <meta name="description" content="L4stZ - A passionate explorer of technology, cybersecurity, and creative coding" />
+import { useState, useRef } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useProducts } from '@/hooks/useProducts';
+import { useAdmin } from '@/hooks/useAdmin';
+import { X, Upload, Image as ImageIcon } from 'lucide-react';
+
+export default function ProductForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    price: '',
+    description: '',
+    category: ''
+  });
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const [error, setError] = useState('');
   
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- FontAwesome CDN -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { addProduct } = useProducts();
+  const { setShowProductForm } = useAdmin();
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
-
-    /* Default dark theme colors */
-    :root {
-      --bg-color: #000000;
-      --text-color: #d1d5db;
-      --card-bg: #1f2937;
-      --header-bg: #0f172a;
-      --section-bg: #000000;
-      --link-hover: #3b82f6;
-      --shadow-color: rgba(59, 130, 246, 0.4);
-    }
-
-    /* Light theme overrides */
-    body[data-theme="light"] {
-      --bg-color: #f9fafb;
-      --text-color: #1f2937;
-      --card-bg: #e5e7eb;
-      --header-bg: #f3f4f6;
-      --section-bg: #ffffff;
-      --link-hover: #2563eb;
-      --shadow-color: rgba(37, 99, 235, 0.4);
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .gradient-text {
-      background: linear-gradient(90deg, #3b82f6, #10b981);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-weight: 700;
-    }
-
-    .glow-on-hover {
-      transition: all 0.3s ease;
-    }
-
-    .glow-on-hover:hover {
-      box-shadow: 0 0 15px var(--shadow-color);
-    }
-
-    /* Profile Card */
-    .profile-card {
-      max-width: 22rem;
-      background: var(--card-bg);
-      color: var(--text-color);
-      border-radius: 1rem;
-      overflow: visible;
-      padding: 1.5rem 1.5rem 2.5rem 1.5rem;
-      box-shadow: 0 0 10px var(--shadow-color);
-      transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-      position: relative;
-      margin: auto;
-      flex-shrink: 0;
-    }
-
-    .profile-card:hover {
-      box-shadow: 0 0 20px var(--shadow-color);
-      transform: scale(1.03);
-    }
-
-    .profile-card img {
-      width: 9rem;
-      height: 9rem;
-      border-radius: 9999px;
-      border: 4px solid var(--bg-color);
-      object-fit: cover;
-      position: absolute;
-      left: 50%;
-      top: -4.5rem;
-      transform: translateX(-50%);
-      box-shadow: 0 0 10px var(--shadow-color);
-      transition: transform 0.5s ease;
-      background: var(--bg-color);
-    }
-
-    .profile-card:hover img {
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: translateX(-50%) scale(1);
-        box-shadow: 0 0 10px var(--shadow-color);
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+      if (!validTypes.includes(file.type)) {
+        setError('Please select a valid image file (JPG, PNG, GIF, or WebP)');
+        return;
       }
-      50% {
-        transform: translateX(-50%) scale(1.05);
-        box-shadow: 0 0 20px var(--shadow-color);
+      if (file.size > 5 * 1024 * 1024) {
+        setError('Image file size must be less than 5MB');
+        return;
       }
+
+      setError('');
+      setImageFile(file);
+      
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
     }
+  };
 
-    .profile-card h2 {
-      margin-top: 5rem;
-      text-align: center;
-      color: #3b82f6;
-      font-weight: 700;
-      font-size: 1.75rem;
-      text-shadow: 0 0 5px rgba(59, 130, 246, 0.7);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.name && formData.price && formData.description && formData.category) {
+      // Use preview image or fallback logo
+      const imageUrl = imagePreview || 'YOUR_LOGO_URL_HERE';
+      
+      addProduct({
+        name: formData.name,
+        price: parseFloat(formData.price),
+        description: formData.description,
+        image: imageUrl,
+        category: formData.category,
+        isNew: true
+      });
+      
+      setFormData({ name: '', price: '', description: '', category: '' });
+      setImageFile(null);
+      setImagePreview('');
+      setError('');
+      setShowProductForm(false);
     }
+  };
 
-    .profile-card p {
-      margin-top: 1rem;
-      text-align: center;
-      color: var(--text-color);
-      font-size: 1rem;
-      line-height: 1.5;
-    }
+  return (
+    <Dialog open={true} onOpenChange={() => setShowProductForm(false)}>
+      <DialogContent className="bg-gray-900/95 backdrop-blur-xl border-white/10 text-white max-w-md mx-4 max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="text-xl">Add New Product</DialogTitle>
+          <button
+            onClick={() => setShowProductForm(false)}
+            className="absolute right-4 top-4 text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            <X size={20} />
+          </button>
+        </DialogHeader>
+        
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            placeholder="Product Name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-emerald-500 transition-colors duration-300"
+            required
+          />
 
-    /* New Shiny Text Animation */
-    .shiny-text {
-      position: relative;
-      color: #3b82f6;
-      font-weight: 700;
-      background: linear-gradient(
-        90deg,
-        #3b82f6 20%,
-        #10b981 40%,
-        #3b82f6 60%
-      );
-      background-size: 200% 100%;
-      background-position: 200% center;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: shiny 3s linear infinite;
-      -webkit-text-fill-color: transparent;
-    }
+          <Input
+            type="number"
+            placeholder="Price"
+            value={formData.price}
+            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+            className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-emerald-500 transition-colors duration-300"
+            required
+          />
 
-    @keyframes shiny {
-      0% {
-        background-position: 200% center;
-      }
-      100% {
-        background-position: -200% center;
-      }
-    }
+          <Textarea
+            placeholder="Description"
+            value={formData.description}
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 min-h-20 focus:border-emerald-500 transition-colors duration-300"
+            required
+          />
 
-    /* Reduce vertical spacing for cleaner look */
-    section {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-      background-color: var(--section-bg);
-      transition: background-color 0.3s ease;
-    }
+          {/* Image Upload Section */}
+          <div className="space-y-3">
+            <label className="text-sm font-medium text-gray-300">Product Image</label>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleFileSelect}
+              className="hidden"
+            />
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => fileInputRef.current?.click()}
+              className="w-full border-white/10 text-white hover:bg-white/5 transition-all duration-300 flex items-center gap-2"
+            >
+              <Upload size={16} />
+              {imageFile ? 'Change Image' : 'Upload Image'}
+            </Button>
+            
+            {imagePreview ? (
+              <div className="relative">
+                <img
+                  src={imagePreview}
+                  alt="Product preview"
+                  className="w-full h-32 object-contain rounded-lg border border-white/10"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setImageFile(null);
+                    setImagePreview('');
+                  }}
+                  className="absolute top-2 right-2 bg-red-500/80 hover:bg-red-500 text-white rounded-full p-1 transition-colors duration-300"
+                >
+                  <X size={14} />
+                </button>
+              </div>
+            ) : (
+              <div className="w-full h-32 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center">
+                <img
+                  src="YOUR_LOGO_URL_HERE"
+                  alt="Default logo"
+                  className="h-20 object-contain"
+                />
+              </div>
+            )}
+            
+            {error && <p className="text-red-400 text-sm">{error}</p>}
+          </div>
 
-    /* Container max width adjustments */
-    .container {
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+          <Select
+            value={formData.category}
+            onValueChange={(value) => setFormData({ ...formData, category: value })}
+          >
+            <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-emerald-500 transition-colors duration-300">
+              <SelectValue placeholder="Select Category" />
+            </SelectTrigger>
+            <SelectContent className="bg-gray-800 border-gray-700">
+              <SelectItem value="Courses">Courses</SelectItem>
+              <SelectItem value="Templates">Templates</SelectItem>
+              <SelectItem value="Tools">Tools</SelectItem>
+              <SelectItem value="Guides">Guides</SelectItem>
+              <SelectItem value="Other">Other</SelectItem>
+            </SelectContent>
+          </Select>
 
-    /* Theme toggle button */
-    #theme-toggle-btn {
-      background: transparent;
-      border: 2px solid var(--text-color);
-      color: var(--text-color);
-      padding: 0.4rem 0.8rem;
-      border-radius: 0.375rem;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    }
-
-    #theme-toggle-btn:hover {
-      background-color: var(--text-color);
-      color: var(--bg-color);
-      border-color: var(--text-color);
-    }
-
-  </style>
-</head>
-
-<body>
-
-  <!-- Header -->
-  <header class="sticky top-0 z-50 border-b border-gray-800 shadow-sm" style="background-color: var(--header-bg); transition: background-color 0.3s ease;">
-    <div class="container px-6 py-4 flex justify-between items-center">
-      <a href="#" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500">
-        L4stZ
-      </a>
-      <nav class="hidden md:flex space-x-8">
-        <a href="#about" class="font-medium hover:text-blue-500 transition">About</a>
-        <a href="#skills" class="font-medium hover:text-blue-500 transition">Skills</a>
-        <a href="#contact" class="font-medium hover:text-blue-500 transition">Contact</a>
-      </nav>
-
-      <!-- Theme Toggle Button -->
-      <button id="theme-toggle-btn" aria-label="Toggle Dark/Light Theme">
-        <i class="fas fa-moon"></i> Dark Mode
-      </button>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-[#0f172a] to-black text-center max-w-3xl mx-auto px-6">
-    <h1 class="text-5xl font-bold mb-6 shiny-text" id="hero-title">
-      Hello, I'm <span class="gradient-text font-extrabold">L4stZ</span>
-    </h1>
-    <p class="text-2xl mb-8 text-gray-400">💻 Developer | 🔐 Cybersecurity Enthusiast | 🎨 Creative Thinker</p>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="max-w-5xl mx-auto px-6">
-    <h2 class="text-4xl font-bold mb-10 text-center shiny-text" id="about-title">
-      About <span class="gradient-text">Me</span>
-    </h2>
-
-    <div class="flex flex-col md:flex-row items-center gap-10">
-      <!-- Profile Card -->
-      <div class="profile-card relative">
-        <img
-          src="https://i.pinimg.com/736x/8a/27/6c/8a276c8e59a21fc66f433ee19c167b0b.jpg"
-          alt="L4stZ"
-          loading="lazy"
-        />
-        <h2>L4stZ</h2>
-        <p>Hello, I am L4stZ. Welcome to my profile!</p>
-      </div>
-
-      <!-- About Text -->
-      <div class="md:w-2/3 text-lg" style="color: var(--text-color);">
-        <p class="mb-4">
-          <strong>I'm L4stZ</strong> — a passionate explorer of technology, cybersecurity, and creative coding.
-        </p>
-        <p class="mb-4">
-          I thrive on turning ideas into reality, whether it's building sleek applications, uncovering security flaws, or crafting unique digital experiences.
-        </p>
-        <p>
-          I believe in learning without limits, mastering every challenge, and leaving my mark with both skill and style.
-        </p>
-
-        <div class="flex flex-wrap gap-3 mt-6">
-          <span class="px-4 py-2 rounded-full text-sm font-medium flex items-center" style="background-color: var(--card-bg); color: var(--text-color);">
-            <i class="fas fa-laptop-code mr-2 text-blue-500"></i> Developer
-          </span>
-          <span class="px-4 py-2 rounded-full text-sm font-medium flex items-center" style="background-color: var(--card-bg); color: var(--text-color);">
-            <i class="fas fa-shield-alt mr-2 text-green-500"></i> Cybersecurity Enthusiast
-          </span>
-          <span class="px-4 py-2 rounded-full text-sm font-medium flex items-center" style="background-color: var(--card-bg); color: var(--text-color);">
-            <i class="fas fa-palette mr-2 text-purple-500"></i> Creative Thinker
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills" class="max-w-5xl mx-auto px-6" style="background-color: var(--section-bg);">
-    <h2 class="text-4xl font-bold mb-10 text-center shiny-text" id="skills-title">
-      My <span class="gradient-text">Skills</span>
-    </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-md mx-auto mb-12">
-      <div class="bg-[var(--card-bg)] p-6 rounded-xl border border-gray-800 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/50">
-        <div class="flex items-center mb-4">
-          <i class="fab fa-python text-3xl mr-4 text-blue-500"></i>
-          <h3 class="text-xl font-semibold" style="color: var(--text-color);">Python</h3>
-        </div>
-        <div class="w-full bg-gray-800 rounded-full h-2.5">
-          <div class="bg-blue-500 h-2.5 rounded-full" style="width: 85%;"></div>
-        </div>
-        <div class="mt-2 text-right text-sm" style="color: #9ca3af;">85%</div>
-      </div>
-
-      <div class="bg-[var(--card-bg)] p-6 rounded-xl border border-gray-800 transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/50">
-        <div class="flex items-center mb-4">
-          <i class="fas fa-shield-alt text-3xl mr-4 text-green-500"></i>
-          <h3 class="text-xl font-semibold" style="color: var(--text-color);">Cybersecurity</h3>
-        </div>
-        <div class="w-full bg-gray-800 rounded-full h-2.5">
-          <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%;"></div>
-        </div>
-        <div class="mt-2 text-right text-sm" style="color: #9ca3af;">80%</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Spotify Player Section -->
-  <section class="max-w-5xl mx-auto px-6 mb-12" style="background-color: var(--section-bg);">
-    <h2 class="text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 shiny-text" id="spotify-title">
-      Currently Playing
-    </h2>
-    <iframe
-      title="Spotify - Sayonara (track)"
-      src="https://open.spotify.com/embed/track/7JQ9ELsV3FucPDWl0qjihX?utm_source=generator"
-      width="100%"
-      height="80"
-      frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"
-      class="rounded-lg shadow-lg"
-    ></iframe>
-  </section>
-
-  <!-- Connect With Me Section -->
-  <section class="max-w-5xl mx-auto px-6" style="background-color: var(--section-bg);">
-    <h2 class="text-3xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 shiny-text" id="connect-title">
-      Connect With Me
-    </h2>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-      <a href="https://discord.com/users/1289186305028259922" target="_blank" rel="noopener noreferrer"
-         class="p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover" style="background-color: var(--card-bg); color: var(--text-color);">
-        <i class="fab fa-discord text-4xl text-green-400 mb-3"></i>
-        <span>Discord</span>
-      </a>
-      <a href="https://www.linkedin.com/in/adem-alioua-5864ab370/" target="_blank" rel="noopener noreferrer"
-         class="p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover" style="background-color: var(--card-bg); color: var(--text-color);">
-        <i class="fab fa-linkedin text-4xl text-green-400 mb-3"></i>
-        <span>LinkedIn</span>
-      </a>
-      <a href="https://fr.fiverr.com/ademalioua/buying?source=avatar_menu_profile" target="_blank" rel="noopener noreferrer"
-         class="p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover" style="background-color: var(--card-bg); color: var(--text-color);">
-        <i class="fas fa-star text-4xl text-green-400 mb-3"></i>
-        <span>Fiverr</span>
-      </a>
-      <a href="https://open.spotify.com/user/31uoxwjzahpnr3sazpwqt2em3lc4" target="_blank" rel="noopener noreferrer"
-         class="p-6 rounded-xl flex flex-col items-center justify-center border border-gray-800 hover:border-blue-500 transition glow-on-hover" style="background-color: var(--card-bg); color: var(--text-color);">
-        <i class="fab fa-spotify text-4xl text-green-400 mb-3"></i>
-        <span>Spotify</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="max-w-5xl mx-auto px-6 mb-12" style="background-color: var(--header-bg); color: var(--text-color);">
-    <h2 class="text-3xl font-bold mb-10 text-center shiny-text" id="contact-title">
-      Get In <span class="gradient-text">Touch</span>
-    </h2>
-
-    <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div
-        class="p-6 rounded-xl border border-gray-800 text-center glow-on-hover hover:text-blue-500 transition" style="background-color: var(--card-bg); color: var(--text-color);">
-        <i class="fas fa-envelope text-3xl text-blue-500 mb-4"></i>
-        <h3 class="text-lg font-semibold mb-2">Email</h3>
-        <a href="mailto:aliouaadem345@gmail.com" class="hover:underline" style="color: var(--text-color);">aliouaadem345@gmail.com</a>
-      </div>
-      <div
-        class="p-6 rounded-xl border border-gray-800 text-center glow-on-hover hover:text-blue-500 transition" style="background-color: var(--card-bg); color: var(--text-color);">
-        <i class="fab fa-github text-3xl text-blue-500 mb-4"></i>
-        <h3 class="text-lg font-semibold mb-2">GitHub</h3>
-        <a href="https://github.com" class="hover:underline" target="_blank" rel="noopener noreferrer" style="color: var(--text-color);">github.com/L4stZ</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="border-t border-gray-800 py-8" style="background-color: var(--section-bg); color: var(--text-color);">
-    <div class="container px-6 flex flex-col items-center">
-      <div class="flex space-x-6 mb-4">
-        <a href="#" class="hover:text-white text-xl transition" style="color: var(--text-color);"><i class="fab fa-github"></i></a>
-        <a href="#" class="hover:text-white text-xl transition" style="color: var(--text-color);"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="hover:text-white text-xl transition" style="color: var(--text-color);"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-      <p class="text-sm">&copy; 2025 L4stZ. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script>
-    const themeToggleBtn = document.getElementById('theme-toggle-btn');
-    const body = document.body;
-
-    // Initialize theme from localStorage or default to dark
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-
-    themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = body.getAttribute('data-theme') || 'dark';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      setTheme(newTheme);
-    });
-
-    function setTheme(theme) {
-      if (theme === 'light') {
-        body.setAttribute('data-theme', 'light');
-        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-      } else {
-        body.setAttribute('data-theme', 'dark');
-        themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
-      }
-      localStorage.setItem('theme', theme);
-    }
-  </script>
-</body>
-</html>
-
+          <div className="flex gap-3 pt-4">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setShowProductForm(false)}
+              className="flex-1 border-white/10 text-white hover:bg-white/5 transition-all duration-300"
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white transition-all duration-500 hover:scale-105 transform"
+            >
+              Add Product
+            </Button>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}
